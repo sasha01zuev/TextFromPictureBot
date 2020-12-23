@@ -6,8 +6,10 @@ import pytesseract
 from PIL import Image
 from loader import dp
 from keyboards.inline import bg_color_keyboard
+from utils.misc import rate_limit
 
 
+@rate_limit(limit=5)  #anti-spam
 @dp.message_handler(content_types=ContentType.PHOTO)
 async def getting_photo(message: Message):
     """Downloading to directory picture from message. Selecting background color from pic"""
