@@ -1,0 +1,13 @@
+from aiogram.types import CallbackQuery
+
+from loader import dp
+from keyboards.inline import bg_color_keyboard, d_language_keyboard
+from keyboards.inline.callback_data import bg_color_callback
+
+
+@dp.callback_query_handler(bg_color_callback.filter(color='dark'))
+async def selecting_language(call: CallbackQuery):
+    """Selecting background color from pic"""
+    await call.answer(cache_time=5)
+    await call.message.delete()
+    await call.message.answer("Choose language from picture:",  reply_markup=d_language_keyboard)

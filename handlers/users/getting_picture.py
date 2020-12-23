@@ -5,16 +5,14 @@ import cv2
 import pytesseract
 from PIL import Image
 from loader import dp
+from keyboards.inline import bg_color_keyboard
 
 
 @dp.message_handler(content_types=ContentType.PHOTO)
 async def getting_photo(message: Message):
-    """Getting and downloading to directory photo from message"""
-
-    await message.answer("Скачал фото! 🤨😲")
-    picture_id = message.photo[-1].file_id
-    await message.photo[-1].download('pictures/picture.png')
-    print(picture_id)
-    print(pytesseract.get_languages(config=''))
-    config = r'--oem 3 --psm 3'
-    print(pytesseract.image_to_string('pictures/picture.зтп', lang='rus', config=config))
+    """Downloading to directory picture from message. Selecting background color from pic"""
+    try:
+        await message.photo[-1].download('pictures/picture.png')
+        await message.answer("Choose background color:",  reply_markup=bg_color_keyboard)
+    except Exception as err:
+        await message.answer(f'Oops, some unknown error\n{err}')
