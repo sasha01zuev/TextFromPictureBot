@@ -17,7 +17,13 @@ d_language_keyboard = InlineKeyboardMarkup(row_width=1,
                                                    InlineKeyboardButton(text="Український🇺🇦",
                                                                         callback_data=language_callback.new(
                                                                             lang="d_ukr"))
+                                               ],
+                                               [
+                                                   InlineKeyboardButton(text="All in one🇺🇳",
+                                                                        callback_data=language_callback.new(
+                                                                            lang="d_all"))
                                                ]
+
 
                                            ]
                                            )
@@ -34,6 +40,11 @@ l_language_keyboard = InlineKeyboardMarkup(row_width=1,
                                                    InlineKeyboardButton(text="Український🇺🇦",
                                                                         callback_data=language_callback.new(
                                                                             lang="l_ukr"))
+                                               ],
+                                               [
+                                                   InlineKeyboardButton(text="All in one🇺🇳",
+                                                                        callback_data=language_callback.new(
+                                                                            lang="l_all"))
                                                ]
 
                                            ]
