@@ -1,2 +1,2 @@
-Template for telegram bot
+Text from picture telegram bot
 =================================
