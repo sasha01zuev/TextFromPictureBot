@@ -1,10 +1,5 @@
-from aiogram import types
-from aiogram.dispatcher import FSMContext
 from aiogram.types import ContentType, Message
-import cv2
-import pytesseract
-from PIL import Image
-from loader import dp
+from loader import dp, bot
 from keyboards.inline import bg_color_keyboard
 from utils.misc import rate_limit
 
