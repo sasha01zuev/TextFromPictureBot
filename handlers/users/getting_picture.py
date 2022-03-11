@@ -10,6 +10,8 @@ async def getting_photo(message: Message):
     """Downloading to directory picture from message. Selecting background color from pic"""
     try:
         await message.photo[-1].download('pictures/picture.png')
-        await message.answer("Choose background color:",  reply_markup=bg_color_keyboard)
+        photo_id = message.photo[-1].file_id
+        # await message.answer("Choose background color:",  reply_markup=bg_color_keyboard)
+        await message.answer_photo(photo_id)
     except Exception as err:
         await message.answer(f'Oops, some unknown error\n{err}')

@@ -1,7 +1,7 @@
 aiogram==2.9.2
 python-dotenv==0.14.0
-environs==8.0.0
+environs~=9.3.4
 asyncpg==0.21.0
-opencv-python~=4.4.0.46
-pytesseract~=0.3.7
-Pillow~=7.0.0
+opencv-python~=4.5.3.56
+numpy~=1.21.2
+loguru~=0.5.3
