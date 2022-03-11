@@ -1,4 +1,5 @@
 from environs import Env
+from pathlib import Path
 
 env = Env()
 env.read_env()
@@ -11,3 +12,7 @@ PGUSER = env("PGUSER")
 PGPASSWORD = env("PGPASSWORD")
 
 IP = env("IP")
+
+I18N_DOMAIN = 'OCRbot'
+BASE_DIR = Path(__file__).parent.parent
+LOCALES_DIR = BASE_DIR / 'locales'

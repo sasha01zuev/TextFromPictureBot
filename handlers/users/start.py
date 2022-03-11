@@ -1,7 +1,7 @@
 from aiogram.dispatcher.filters import Command
 from aiogram.types import Message
 
-from loader import dp, db
+from loader import dp, db, _
 from utils.misc import rate_limit
 
 
@@ -14,5 +14,5 @@ async def start(message: Message):
 
     await db.add_user(user_id, username, first_name)
     await db.add_user_info(user_id)
-    await message.answer("Send me picture with text and I send you only text💬\n"
-                         "I'll try to make it right😅")
+    await message.answer(_("Send me picture with text and I send you only text💬\n"
+                         "I'll try to make it right😅"))

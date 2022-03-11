@@ -5,11 +5,14 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from utils.db_api.postgresql import Database
 from data import config
-
+from middlewares import setup_language
 
 bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
+
+i18n = setup_language(dp)
+_ = i18n.gettext
 
 loop = asyncio.get_event_loop()
 db = loop.run_until_complete(Database.create())

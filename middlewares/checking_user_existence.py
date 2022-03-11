@@ -2,12 +2,11 @@ from aiogram import types
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 
-from loader import db
-
 
 class CheckingUserExistence(BaseMiddleware):
     """Tracker of user last action"""
     async def on_process_message(self, message: types.Message, data: dict):
+        from loader import db
         user_id = message.from_user.id
         user = await db.get_user(user_id)
 
@@ -18,6 +17,7 @@ class CheckingUserExistence(BaseMiddleware):
             raise CancelHandler()
 
     async def on_process_callback_query(self, cq: types.CallbackQuery, data: dict):
+        from loader import db
         user_id = cq.from_user.id
 
         user = await db.get_user(user_id)
