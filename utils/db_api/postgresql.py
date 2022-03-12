@@ -70,3 +70,15 @@ class Database:
             return await self.pool.fetchval(sql, user_id)
         except:
             return None
+
+    async def change_language(self, user_id: int, lang_code: str):
+        try:
+            sql = """
+                UPDATE user_info SET lang_code = $2 WHERE user_id = $1;
+                """
+            await self.pool.execute(sql, user_id, lang_code)
+            logger.success(f'{user_id} - Successfully updated in database[user_info.lang_code]!')
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while updating in database[user_info.lang_code]\n'
+                             f'More details:\n'
+                             f'{err}')

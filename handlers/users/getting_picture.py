@@ -1,6 +1,5 @@
 from aiogram.types import ContentType, Message
-from loader import dp, bot
-from keyboards.inline import bg_color_keyboard
+from loader import dp, bot, _
 from utils.misc import rate_limit
 
 
@@ -14,4 +13,4 @@ async def getting_photo(message: Message):
         # await message.answer("Choose background color:",  reply_markup=bg_color_keyboard)
         await message.answer_photo(photo_id)
     except Exception as err:
-        await message.answer(f'Oops, some unknown error\n{err}')
+        await message.answer(_(f'Oops, some unknown error\n{err}'))
