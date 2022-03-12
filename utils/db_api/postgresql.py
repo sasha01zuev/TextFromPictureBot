@@ -82,3 +82,27 @@ class Database:
             logger.exception(f'{user_id} - Unknown error while updating in database[user_info.lang_code]\n'
                              f'More details:\n'
                              f'{err}')
+
+    async def add_user_to_blacklist(self, user_id: int):
+        try:
+            sql = """
+               INSERT INTO blacklist(user_id) 
+               VALUES($1);
+               """
+            await self.pool.execute(sql, user_id)
+            logger.success(f'{user_id} - Successfully added to database[blacklist]!')
+        except asyncpg.exceptions.UniqueViolationError:
+            raise asyncpg.exceptions.UniqueViolationError
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while adding user to database[blacklist]\n'
+                             f'More details:\n'
+                             f'{err}')
+
+    async def get_user_from_blacklist(self, user_id: int):
+        try:
+            sql = """
+            SELECT user_id FROM blacklist WHERE user_id = $1;
+            """
+            return await self.pool.fetchval(sql, user_id)
+        except:
+            return None

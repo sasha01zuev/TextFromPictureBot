@@ -1,4 +1,5 @@
 from .language_buttons import dp
+from .admin_commands import dp
 
 from .start import dp
 from .getting_picture import dp
