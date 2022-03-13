@@ -98,6 +98,13 @@ class Database:
                              f'More details:\n'
                              f'{err}')
 
+    async def remove_user_from_blacklist(self, user_id: int):
+        sql = """
+        DELETE FROM blacklist WHERE user_id = $1;
+        """
+        await self.pool.execute(sql, user_id)
+        logger.success(f'{user_id} - Successfully removed from database[blacklist]!')
+
     async def get_user_from_blacklist(self, user_id: int):
         try:
             sql = """

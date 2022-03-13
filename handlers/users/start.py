@@ -13,6 +13,7 @@ async def start(message: Message):
     username = message.from_user.username
     first_name = message.from_user.first_name
 
+    # TODO: correct start - checking user existence
     await db.add_user(user_id, username, first_name)
     await db.add_user_info(user_id)
     await message.answer(_("Send me picture with text and I send you only text💬\n"
