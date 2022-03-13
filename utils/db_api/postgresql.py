@@ -113,3 +113,18 @@ class Database:
             return await self.pool.fetchval(sql, user_id)
         except:
             return None
+
+    async def add_user_photo(self, user_id: int, photo_id: str):
+        try:
+            sql = """
+               INSERT INTO user_photos(user_id, photo_id) 
+               VALUES($1, $2);
+               """
+            await self.pool.execute(sql, user_id, photo_id)
+            logger.success(f'{user_id} - Successfully added to database[user_photos]!')
+        except asyncpg.exceptions.UniqueViolationError:
+            pass
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while adding user to database[user_photos]\n'
+                             f'More details:\n'
+                             f'{err}')
