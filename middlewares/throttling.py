@@ -34,9 +34,10 @@ class ThrottlingMiddleware(BaseMiddleware):
             raise CancelHandler()
 
     async def message_throttled(self, message: types.Message, throttled: Throttled):
+        from loader import _
         delta = throttled.rate - throttled.delta
         if throttled.exceeded_count == 2:
-            await message.reply('🛑 Слишком часто! Давай не так быстро!')
+            await message.reply(_('🛑 So often!'))
         elif throttled.exceeded_count == 3:
-            await message.reply(f"⏳ Всё! Больше не отвечу, пока не пройдет {int(delta)} сек.!")
+            await message.reply(_(f"⏳ Wait a few seconds!"))
         await asyncio.sleep(delta)
