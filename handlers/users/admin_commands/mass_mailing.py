@@ -146,7 +146,6 @@ async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
     state_data = await state.get_data()
     audience = state_data['audience']
-    buttons_quantity = state_data['buttons_quantity']
     mass_mailing_keyboard = state_data['keyboard']
     message_text = state_data['message_text']
     photo_id = state_data['photo_id']

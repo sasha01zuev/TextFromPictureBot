@@ -8,3 +8,12 @@ cancel_keyboard = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+
+cancel_mtu_keyboard = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="⬅ Отмена")
+        ]
+    ],
+    resize_keyboard=True
+)
