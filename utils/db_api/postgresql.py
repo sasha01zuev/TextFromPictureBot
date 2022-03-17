@@ -71,6 +71,21 @@ class Database:
         except:
             return None
 
+    async def get_users_by_language(self, lang_code: str):
+        try:
+            if lang_code == 'all':
+                sql = """
+                SELECT * from user_info;
+                """
+                return await self.pool.fetch(sql)
+            else:
+                sql = """
+                SELECT * from user_info WHERE lang_code = $1;
+                """
+                return await self.pool.fetch(sql, lang_code)
+        except:
+            return None
+
     async def change_language(self, user_id: int, lang_code: str):
         try:
             sql = """
