@@ -2,9 +2,7 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 
 from data.config import ADMINS_ID, MAIN_ADMIN
-from loader import dp, db
-from loguru import logger
-import datetime
+from loader import dp
 
 
 @dp.message_handler(Command('admin_command_list'), user_id=ADMINS_ID)

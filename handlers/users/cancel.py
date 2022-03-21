@@ -2,6 +2,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
 from loader import dp, _
+import os
 
 
 @dp.callback_query_handler(text="cancel")
@@ -14,6 +15,18 @@ async def cancel(call: CallbackQuery):
 async def confirm_mass_mailing(call: CallbackQuery):
     await call.answer(text='✅ Canceled')
     await call.message.delete()
+
+
+@dp.callback_query_handler(text='cancel', state='ConfirmLangPhotoText')
+async def confirm_language_photo_text(call: CallbackQuery, state: FSMContext):
+    await call.answer(text='✅ Canceled')
+    await call.message.delete()
+
+    state_data = await state.get_data()
+    photo_path = state_data.get('photo_path')
+    os.remove(photo_path)
+
+    await state.finish()
 
 
 @dp.callback_query_handler(text="cancel_mass_mailing", state="ConfirmingTextMessage")

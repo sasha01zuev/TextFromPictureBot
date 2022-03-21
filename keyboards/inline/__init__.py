@@ -1,4 +1,6 @@
 from .language import language_keyboard
 from .message_type_to_admin import message_type_keyboard
 from .confirm_mass_mailing import confirm_mass_mailing_keyboard
+from .photo_text_language import photo_text_language_keyboard
+
 
