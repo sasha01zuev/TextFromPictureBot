@@ -132,8 +132,8 @@ class Database:
     async def add_user_photo(self, user_id: int, photo_id: str):
         try:
             sql = """
-               INSERT INTO user_photos(user_id, photo_id) 
-               VALUES($1, $2);
+               INSERT INTO user_photos(user_id, photo_id, datetime) 
+               VALUES($1, $2, NOW());
                """
             await self.pool.execute(sql, user_id, photo_id)
             logger.success(f'{user_id} - Successfully added to database[user_photos]!')
@@ -143,3 +143,27 @@ class Database:
             logger.exception(f'{user_id} - Unknown error while adding user to database[user_photos]\n'
                              f'More details:\n'
                              f'{err}')
+
+    async def checking_user_subscribe(self, user_id: int):
+        try:
+            sql = """
+            SELECT * FROM subscriptions WHERE (user_id = $1) and (date_to > NOW()) ORDER BY id DESC LIMIT 1;
+            """
+            response = await self.pool.fetchrow(sql, user_id)
+            if response:
+                return True
+            return False
+        except:
+            return False
+
+    async def api_requests_per_day(self, user_id: int):
+        try:
+            sql = """
+            SELECT count(*) FROM user_photos WHERE (user_id = $1) and (CURRENT_DATE = datetime::date);
+            """
+            requests = await self.pool.fetchval(sql, user_id)
+            if requests <= 5:
+                return True
+            return False
+        except:
+            return False

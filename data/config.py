@@ -11,6 +11,8 @@ MAIN_ADMIN = env("MAIN_ADMIN")
 PGUSER = env("PGUSER")
 PGPASSWORD = env("PGPASSWORD")
 
+CHANNEL = env("CHANNEL")
+
 IP = env("IP")
 
 OCR_API_KEY = env("OCR_API_KEY")
