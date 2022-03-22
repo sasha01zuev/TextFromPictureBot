@@ -24,7 +24,7 @@ from datetime import datetime
 URL_API = "https://api.ocr.space/parse/image"
 
 
-async def get_transactions(photo_bytes, api_key, language: str):
+async def get_api_response(photo_bytes, api_key, language: str):
     async with aiohttp.ClientSession() as session:
         async with session.post(URL_API,
                                 data={
@@ -64,9 +64,10 @@ async def getting_photo(message: Message, state: FSMContext):
                     await state.update_data(photo_path=photo_path)
                 except Exception as err:
                     logger.exception(f'{err}')
-                    await message.answer(_(f'Oops, some unknown error\n{err}'))
+                    await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
             else:
-                await message.answer(_('Subscription needed! More information here -> /donate'))
+                await message.answer(_('You have reached your daily limit (5 photos/day)! Subscription needed!\n'
+                                       'More information here -> /donate'))
         else:
             try:
                 photo_id = message.photo[-1].file_id
@@ -82,7 +83,7 @@ async def getting_photo(message: Message, state: FSMContext):
                 await state.update_data(photo_path=photo_path)
             except Exception as err:
                 logger.exception(f'{err}')
-                await message.answer(_(f'Oops, some unknown error\n{err}'))
+                await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
     else:
         await message.answer(_('⚠ OCR is available only for those who are subscribed to our channel!\n\n'
                              'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>, '
@@ -115,18 +116,20 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
         unused_var, compressed_image = cv2.imencode('.png', photo, [1, 90])
         photo_bytes = io.BytesIO(compressed_image)
 
-        response = json.loads(await get_transactions(photo_bytes=photo_bytes, api_key=OCR_API_KEY, language=photo_lang))
+        response = json.loads(await get_api_response(photo_bytes=photo_bytes, api_key=OCR_API_KEY, language=photo_lang))
         print(response)
 
-        text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
+        try:
+            text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
 
-        if text_from_photo:
-            await call.message.edit_text(f'{text_from_photo}')
-        else:
-            await call.message.edit_text(_('There is no text on the photo!'))
+            if text_from_photo:
+                await call.message.edit_text(f'{text_from_photo}')
+            else:
+                await call.message.edit_text(_('There is no text on the photo!'))
+        except IndexError:
+            await call.message.edit_text(_('Server overloaded, please try again later'))
 
     os.remove(photo_path)
-
     await state.finish()
 
 

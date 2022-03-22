@@ -9,5 +9,5 @@ from utils.misc import rate_limit
 @dp.message_handler(Command("help"))
 async def start(message: Message):
     await message.answer(_("Send me picture and I send text from it🖼💬\n"
-                         "- Try to send precise image for more correct recognition✅\n"
-                         "- If you got non correct text, \ntry to select another background️🔲↔🔳"))
+                           "- Try to send precise image for more correct recognition✅\n"
+                           "- If you got non correct text, \ntry to select another background️🔲↔🔳"))
