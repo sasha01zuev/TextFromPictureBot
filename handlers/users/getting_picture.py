@@ -66,7 +66,7 @@ async def getting_photo(message: Message, state: FSMContext):
                     logger.exception(f'{err}')
                     await message.answer(_(f'Oops, some unknown error\n{err}'))
             else:
-                await message.answer('Нужна подписка')  # TODO
+                await message.answer(_('Subscription needed! More information here -> /donate'))
         else:
             try:
                 photo_id = message.photo[-1].file_id
@@ -84,9 +84,9 @@ async def getting_photo(message: Message, state: FSMContext):
                 logger.exception(f'{err}')
                 await message.answer(_(f'Oops, some unknown error\n{err}'))
     else:
-        await message.answer('⚠ Игра доступна только тем, кто подписан на наш канал!\n\n'
-                             'Подпишись на канал <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>, '
-                             'воспользуйтесь кнопками ниже! ↡',
+        await message.answer(_('⚠ OCR is available only for those who are subscribed to our channel!\n\n'
+                             'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>, '
+                             'use the buttons below ↡'),
                              reply_markup=check_subscription_keyboard,
                              disable_web_page_preview=True)
 
@@ -94,7 +94,7 @@ async def getting_photo(message: Message, state: FSMContext):
 @dp.callback_query_handler(photo_text_language_callback.filter(), state='ConfirmLangPhotoText')
 async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, state: FSMContext):
     await call.answer(cache_time=5)
-    await call.message.edit_text(_('Wait a bit'))
+    await call.message.edit_text(_('⏳ Wait a bit...'))
 
     state_data = await state.get_data()
     photo_path = state_data.get('photo_path')
@@ -125,9 +125,6 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
         else:
             await call.message.edit_text(_('There is no text on the photo!'))
 
-    # except aiogram.utils.exceptions.MessageTextIsEmpty:
-    #     await call.message.answer(_('There is no text on the photo!'))
-
     os.remove(photo_path)
 
     await state.finish()
@@ -138,7 +135,7 @@ async def check_subs(call: CallbackQuery):
     user_id = call.from_user.id
     is_chat_member = await check_subscription(user_id=user_id, channel=CHANNEL)
     if is_chat_member:
-        await call.answer(text="✅ Подтверждено")
+        await call.answer(text=_("✅ Confirmed"))
         await call.message.delete()
     else:
-        await call.answer(text="❗ НЕ Подтвержден!")
+        await call.answer(text=_("❗ Not confirmed"))
