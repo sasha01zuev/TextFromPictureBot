@@ -14,6 +14,11 @@ photo_text_language_keyboard = InlineKeyboardMarkup(
                                      language="rus"))
         ],
         [
+            InlineKeyboardButton(text="Ukrainian (Beta)",
+                                 callback_data=photo_text_language_callback.new(
+                                     language="ukr"))
+        ],
+        [
             InlineKeyboardButton(text="Arabic",
                                  callback_data=photo_text_language_callback.new(
                                      language="ara")),

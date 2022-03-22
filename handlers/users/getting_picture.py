@@ -94,25 +94,36 @@ async def getting_photo(message: Message, state: FSMContext):
 @dp.callback_query_handler(photo_text_language_callback.filter(), state='ConfirmLangPhotoText')
 async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, state: FSMContext):
     await call.answer(cache_time=5)
-    await call.message.delete()
+    await call.message.edit_text(_('Wait a bit'))
 
     state_data = await state.get_data()
     photo_path = state_data.get('photo_path')
     photo_lang = callback_data['language']
 
-    photo = cv2.imread(photo_path)
-    unused_var, compressed_image = cv2.imencode('.png', photo, [1, 90])
-    photo_bytes = io.BytesIO(compressed_image)
+    if photo_lang == 'ukr':
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+        picture = cv2.imread(photo_path, 0)
+        text_from_photo = pytesseract.image_to_string(picture, lang='ukr', config='--oem 3 --psm 6')
+        cv2.waitKey()
 
-    response = json.loads(await get_transactions(photo_bytes=photo_bytes, api_key=OCR_API_KEY, language=photo_lang))
-    print(response)
-
-    text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
-
-    if text_from_photo:
-        await call.message.answer(f'{text_from_photo}')
+        if text_from_photo:
+            await call.message.edit_text(f'{text_from_photo}')
+        else:
+            await call.message.edit_text(_('There is no text on the photo!'))
     else:
-        await call.message.answer(_('There is no text on the photo!'))
+        photo = cv2.imread(photo_path)
+        unused_var, compressed_image = cv2.imencode('.png', photo, [1, 90])
+        photo_bytes = io.BytesIO(compressed_image)
+
+        response = json.loads(await get_transactions(photo_bytes=photo_bytes, api_key=OCR_API_KEY, language=photo_lang))
+        print(response)
+
+        text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
+
+        if text_from_photo:
+            await call.message.edit_text(f'{text_from_photo}')
+        else:
+            await call.message.edit_text(_('There is no text on the photo!'))
 
     # except aiogram.utils.exceptions.MessageTextIsEmpty:
     #     await call.message.answer(_('There is no text on the photo!'))
