@@ -13,7 +13,7 @@ from loader import dp, bot, db, _
 from utils.misc import rate_limit, check_subscription
 import aiohttp
 
-from data.config import OCR_API_KEY, CHANNEL
+from data.config import OCR_API_KEY, OCR_URL_API, CHANNEL
 from PIL import Image
 import pytesseract
 import cv2
@@ -21,12 +21,10 @@ import requests
 import easyocr
 from datetime import datetime
 
-URL_API = "https://api.ocr.space/parse/image"
-
 
 async def get_api_response(photo_bytes, api_key, language: str):
     async with aiohttp.ClientSession() as session:
-        async with session.post(URL_API,
+        async with session.post(OCR_URL_API,
                                 data={
                                     'picture.png': photo_bytes,
                                     "apikey": api_key,
@@ -63,7 +61,6 @@ async def getting_photo(message: Message, state: FSMContext):
                     await state.set_state('ConfirmLangPhotoText')
                     await state.update_data(photo_path=photo_path)
                 except Exception as err:
-                    logger.exception(f'{err}')
                     await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
             else:
                 await message.answer(_('You have reached your daily limit (5 photos/day)! Subscription needed!\n'
@@ -82,7 +79,6 @@ async def getting_photo(message: Message, state: FSMContext):
                 await state.set_state('ConfirmLangPhotoText')
                 await state.update_data(photo_path=photo_path)
             except Exception as err:
-                logger.exception(f'{err}')
                 await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
     else:
         await message.answer(_('⚠ OCR is available only for those who are subscribed to our channel!\n\n'
@@ -117,17 +113,25 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
         photo_bytes = io.BytesIO(compressed_image)
 
         response = json.loads(await get_api_response(photo_bytes=photo_bytes, api_key=OCR_API_KEY, language=photo_lang))
+        is_error = bool(response.get("IsErroredOnProcessing"))
         print(response)
 
-        try:
-            text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
+        if is_error:
+            error_message = response.get('ErrorMessage')[0]
 
-            if text_from_photo:
-                await call.message.edit_text(f'{text_from_photo}')
-            else:
-                await call.message.edit_text(_('There is no text on the photo!'))
-        except IndexError:
-            await call.message.edit_text(_('Server overloaded, please try again later'))
+            if 'file size exceeds' in error_message.lower():
+                await call.message.edit_text('The photo size is too big! '
+                                             'Try to reduce the size of the photo or send another photo!')
+        else:
+            try:
+                text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
+
+                if text_from_photo:
+                    await call.message.edit_text(f'{text_from_photo}')
+                else:
+                    await call.message.edit_text(_('There is no text on the photo!'))
+            except IndexError:
+                await call.message.edit_text(_('Server overloaded, please try again later'))
 
     os.remove(photo_path)
     await state.finish()
