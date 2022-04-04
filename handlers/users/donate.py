@@ -3,7 +3,7 @@ from aiogram.types import Message
 
 from loader import dp, db, _
 from utils.misc import rate_limit
-from keyboards.inline import language_keyboard
+from keyboards.inline import language_keyboard, donate_keyboard
 import aiohttp
 from data.config import CRYPTO_PAY_API_TOKEN
 
@@ -30,4 +30,4 @@ async def donate(message: Message):
                            '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
                            'more servers - less load\n'
                            '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-                           'more servers - less load'))
+                           'more servers - less load'), reply_markup=donate_keyboard)

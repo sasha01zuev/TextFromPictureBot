@@ -2,6 +2,7 @@ from .cancel import dp
 from .language_buttons import dp
 from .admin_commands import dp
 from .types_admin_message import dp
+from .donate_buttons import dp
 
 
 from .start import dp

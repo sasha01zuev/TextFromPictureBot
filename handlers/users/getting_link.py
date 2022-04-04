@@ -3,6 +3,7 @@ import json
 import os
 
 import aiogram
+import asyncpg
 from aiogram.dispatcher import FSMContext, filters
 from aiogram.types import ContentType, Message, InputFile, CallbackQuery
 from loguru import logger
@@ -62,15 +63,27 @@ async def getting_url(message: Message, state: FSMContext):
                 try:
                     photo_link = message.text
 
-                    await db.add_user_photo(user_id, photo_link)
-                    await message.answer(_('Choose the language of the text on the photo:'),
-                                         reply_markup=photo_text_language_keyboard)
+                    try:
+                        await db.add_user_photo(user_id, photo_link)
+                        await message.answer(_('Choose the language of the text on the photo:'),
+                                             reply_markup=photo_text_language_keyboard)
 
-                    await state.set_state('ConfirmLangURLPhotoText')
-                    await state.update_data(photo_link=photo_link)
+                        await state.set_state('ConfirmLangURLPhotoText')
+                        await state.update_data(photo_link=photo_link)
+                    except asyncpg.exceptions.UniqueViolationError:
+                        photo_text = await db.get_photo(photo_link)
+
+                        if photo_text:
+                            await message.answer(photo_text)
+                        else:
+                            await message.answer(_('Choose the language of the text on the photo:'),
+                                                 reply_markup=photo_text_language_keyboard)
+
+                            await state.set_state('ConfirmLangURLPhotoText')
+                            await state.update_data(photo_link=photo_link)
                 except Exception as err:
                     logger.exception(f'{err}')
-                    await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
+                    await message.answer(_('Oops, some unknown error'))
             else:
                 await message.answer(_('You have reached your daily limit (5 photos/day)! Subscription needed!\n'
                                        'More information here -> /donate'))
@@ -78,15 +91,27 @@ async def getting_url(message: Message, state: FSMContext):
             try:
                 photo_link = message.text
 
-                await db.add_user_photo(user_id, photo_link)
-                await message.answer(_('Choose the language of the text on the photo:'),
-                                     reply_markup=photo_text_language_keyboard)
+                try:
+                    await db.add_user_photo(user_id, photo_link)
+                    await message.answer(_('Choose the language of the text on the photo:'),
+                                         reply_markup=photo_text_language_keyboard)
 
-                await state.set_state('ConfirmLangURLPhotoText')
-                await state.update_data(photo_link=photo_link)
+                    await state.set_state('ConfirmLangURLPhotoText')
+                    await state.update_data(photo_link=photo_link)
+                except asyncpg.exceptions.UniqueViolationError:
+                    photo_text = await db.get_photo(photo_link)
+
+                    if photo_text:
+                        await message.answer(photo_text)
+                    else:
+                        await message.answer(_('Choose the language of the text on the photo:'),
+                                             reply_markup=photo_text_language_keyboard)
+
+                        await state.set_state('ConfirmLangURLPhotoText')
+                        await state.update_data(photo_link=photo_link)
             except Exception as err:
                 logger.exception(f'{err}')
-                await message.answer(_('Oops, some unknown error\n{err}').format(err=err))
+                await message.answer(_('Oops, some unknown error!'))
     else:
         await message.answer(_('⚠ OCR is available only for those who are subscribed to our channel!\n\n'
                              'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>, '
@@ -100,6 +125,7 @@ async def confirm_language_url_photo_text(call: CallbackQuery, callback_data: di
     await call.answer(cache_time=5)
     await call.message.edit_text(_('⏳ Wait a bit...'))
 
+    user_id = call.from_user.id
     state_data = await state.get_data()
     photo_link = state_data.get('photo_link')
     photo_path = f'pictures/{call.from_user.id}.png'
@@ -115,22 +141,47 @@ async def confirm_language_url_photo_text(call: CallbackQuery, callback_data: di
 
         if text_from_photo:
             await call.message.edit_text(f'{text_from_photo}')
+            await db.add_photo_text(user_id=user_id, photo_id=photo_link, text=text_from_photo)
         else:
             await call.message.edit_text(_('There is no text on the photo!'))
+            await db.add_photo_text(user_id=user_id, photo_id=photo_link, text=_('There is no text on the photo!'))
         pass
         os.remove(photo_path)
     else:
-        response = json.loads(await get_api_response(photo_url=photo_link, api_key=OCR_API_KEY, language=photo_lang))
-        print(response)
-
         try:
-            text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
-
-            if text_from_photo:
-                await call.message.edit_text(f'{text_from_photo}')
+            response = json.loads(await get_api_response(photo_url=photo_link,
+                                                         api_key=OCR_API_KEY, language=photo_lang))
+            print(response)
+            if '180 number of times within 3600 seconds' in response:
+                await call.message.edit_text(_('Bot is overloaded now! Will be available within the hour\n'
+                                               'Or sign up for a paid subscription - /donate'))
             else:
-                await call.message.edit_text(_('There is no text on the photo!'))
-        except IndexError:
-            await call.message.edit_text(_('Server overloaded, please try again later'))
+                is_error = bool(response.get("IsErroredOnProcessing"))
 
+                if is_error:
+                    error_message = response.get('ErrorMessage')[0]
+
+                    if 'file size exceeds' in error_message.lower():
+                        await call.message.edit_text(_('The photo size is too big! '
+                                                     'Try to reduce the size of the photo or send another photo!\n'
+                                                       'Or sign up for a paid subscription - /donate'))
+                    elif 'timed out waiting' in error_message.lower():
+                        await call.message.edit_text(_('Server overloaded, please try again later\n'
+                                                       'Or sign up for a paid subscription - /donate'))
+                    else:
+                        print(error_message)
+                        await call.message.edit_text(_('An unexpected error has occurred'))
+                else:
+                    text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
+
+                    if text_from_photo:
+                        await call.message.edit_text(f'{text_from_photo}')
+                        await db.add_photo_text(user_id=user_id, photo_id=photo_link, text=text_from_photo)
+                    else:
+                        await call.message.edit_text(_('There is no text on the photo!'))
+                        await db.add_photo_text(user_id=user_id, photo_id=photo_link,
+                                                text=_('There is no text on the photo!'))
+        except Exception as err:
+            print(err)
+            await call.message.edit_text(_('An unexpected error has occurred'))
     await state.finish()

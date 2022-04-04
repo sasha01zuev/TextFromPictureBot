@@ -138,11 +138,32 @@ class Database:
             await self.pool.execute(sql, user_id, photo_id)
             logger.success(f'{user_id} - Successfully added to database[user_photos]!')
         except asyncpg.exceptions.UniqueViolationError:
-            pass
+            raise asyncpg.exceptions.UniqueViolationError
         except Exception as err:
             logger.exception(f'{user_id} - Unknown error while adding user to database[user_photos]\n'
                              f'More details:\n'
                              f'{err}')
+
+    async def add_photo_text(self, user_id: int, photo_id: str, text: str):
+        try:
+            sql = """
+                UPDATE user_photos SET text = $2 WHERE photo_id = $1;
+                """
+            await self.pool.execute(sql, photo_id, text)
+            logger.success(f'{user_id} - Successfully updated in database[user_photos.text]!')
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while updating in database[user_photos.text]\n'
+                             f'More details:\n'
+                             f'{err}')
+
+    async def get_photo(self, photo_id: str):
+        try:
+            sql = """
+            SELECT text FROM user_photos WHERE photo_id = $1;
+            """
+            return await self.pool.fetchval(sql, photo_id)
+        except:
+            return None
 
     async def checking_user_subscribe(self, user_id: int):
         try:

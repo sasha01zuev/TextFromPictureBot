@@ -10,7 +10,7 @@ class CheckingUserExistence(BaseMiddleware):
         user_id = message.from_user.id
         user = await db.get_user(user_id)
 
-        if user or '/start' in message.text:
+        if user or ('/start' in message.text):
             pass
         else:
             await message.answer(_('Press /start !'))
@@ -22,7 +22,7 @@ class CheckingUserExistence(BaseMiddleware):
 
         user = await db.get_user(user_id)
 
-        if user or cq.message.text == '/start':
+        if user or (cq.message.text == '/start'):
             pass
         else:
             await cq.message.answer(_('Press /start !'))

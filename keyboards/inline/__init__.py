@@ -3,4 +3,7 @@ from .message_type_to_admin import message_type_keyboard
 from .confirm_mass_mailing import confirm_mass_mailing_keyboard
 from .photo_text_language import photo_text_language_keyboard
 from .check_subscription import check_subscription_keyboard
-
+from .donate import donate_keyboard
+from .choosing_cryptocurrencies import choosing_cryptocurrencies_keyboard
+from .confirm_pay_amount import confirm_pay_amount_keyboard
+from .confirm_payment import confirm_payment_keyboard
