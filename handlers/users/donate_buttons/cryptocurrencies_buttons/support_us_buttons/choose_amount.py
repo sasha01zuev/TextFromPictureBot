@@ -47,7 +47,7 @@ async def confirm_amount(message: Message, state: FSMContext):
                                    'Amount: ${amount}').format(amount=amount, currency=currency),
                                  reply_markup=confirm_pay_amount_keyboard)
             await state.set_state('ConfirmPayAmount')
-            await state.update_data(currency=currency, amount=amount)
+            await state.update_data(currency=currency, amount=amount, is_paid_subscription=False)
     except ValueError:
         await message.answer(_('‼ Enter amount. For example: 1, 0.7, 55.4'))
 

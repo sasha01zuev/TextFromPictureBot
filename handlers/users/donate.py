@@ -7,18 +7,6 @@ from keyboards.inline import language_keyboard, donate_keyboard
 import aiohttp
 from data.config import CRYPTO_PAY_API_TOKEN
 
-URL_API = 'https://testnet-pay.crypt.bot/api/'
-
-headers = {
-    'Crypto-Pay-API-Token': CRYPTO_PAY_API_TOKEN
-}
-
-
-async def get_api_response():
-    async with aiohttp.ClientSession() as session:
-        async with session.get(URL_API, headers=headers) as response:
-            return await response.text()
-
 
 @rate_limit(limit=5)  # Anti-spam
 @dp.message_handler(Command("donate"))

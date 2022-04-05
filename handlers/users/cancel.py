@@ -60,7 +60,39 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
+@dp.callback_query_handler(text='cancel', state='Donate_PaidSubscription')
+async def cancel(call: CallbackQuery, state: FSMContext):
+    await call.answer(cache_time=5)
+    await state.finish()
+
+    await call.message.edit_text(
+        _('To support us or get a paid subscription, you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
+          '- If you chose "support us" -- you can choose any amount to donate\n\n'
+          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
+          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+          'more servers - less load\n'
+          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          'more servers - less load'), reply_markup=donate_keyboard)
+
+
 @dp.callback_query_handler(text='cancel', state='GetAmountDonate')
+async def cancel(call: CallbackQuery, state: FSMContext):
+    await call.answer(cache_time=5)
+    await state.finish()
+
+    await call.message.edit_text(
+        _('To support us or get a paid subscription, you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
+          '- If you chose "support us" -- you can choose any amount to donate\n\n'
+          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
+          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+          'more servers - less load\n'
+          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          'more servers - less load'), reply_markup=donate_keyboard)
+
+
+@dp.callback_query_handler(text='cancel', state='PaidSubscription_Cryptocurrency')
 async def cancel(call: CallbackQuery, state: FSMContext):
     await call.answer(cache_time=5)
     await state.finish()

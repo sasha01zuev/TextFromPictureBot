@@ -33,8 +33,8 @@ class CryptoPay:
 
     async def create_invoice(self, asset: str, amount: float, description: str = None, hidden_message: str = None,
                              paid_btn_name: str = None, paid_btn_url: str = None, payload: str = None,
-                             allow_comments: bool = True, allow_anonymous: bool = True, expires_in: int = None):
-        -> dict or tuple
+                             allow_comments: bool = True, allow_anonymous: bool = True, expires_in: int = None) \
+            -> dict or None:
         method = 'createInvoice?'
 
         asset = f'&asset={asset}'
@@ -55,11 +55,11 @@ class CryptoPay:
         response = await get_api_response(url, self.api_key)
         print(response)
         if response['ok']:
-            return response
-        else:
-            return 1, response
+            return response['result']
+        print(response['error']['name'])
+        return None
 
-    async def get_invoice(self, invoice_id: str) -> list or None:
+    async def get_paid_invoice(self, invoice_id: str) -> list or None:
         method = 'getInvoices?'
         invoice_id = f'invoice_ids={invoice_id}'
         status = '&status=paid'

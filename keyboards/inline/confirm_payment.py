@@ -3,7 +3,7 @@ from keyboards.inline.callback_data import choosing_cryptocurrency_callback
 from keyboards.inline.cancel_button import cancel_button
 
 confirm_payment_keyboard = InlineKeyboardMarkup(
-    row_width=1,
+    row_width=2,
     inline_keyboard=[
         [
             InlineKeyboardButton(text="✅ Paid",

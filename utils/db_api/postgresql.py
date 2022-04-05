@@ -188,3 +188,31 @@ class Database:
             return False
         except:
             return False
+
+    async def add_user_donate(self, user_id: int, amount: str, currency: str, message: str = None):
+        try:
+            sql = """
+                INSERT INTO donations(user_id, amount, currency, message, datetime)
+                VALUES ($1, $2, $3, $4, NOW());
+                """
+            await self.pool.execute(sql, user_id, amount, currency, message)
+            logger.success(f'{user_id} - Successfully added to database[donations]!')
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while adding to database[donations]\n'
+                             f'More details:\n'
+                             f'{err}')
+
+    async def add_user_subscription(self, user_id: int, date_to: str):
+        try:
+            sql = f"""
+                INSERT INTO subscriptions(user_id, donation_id, date_to)
+                VALUES ($1, 
+                (SELECT id FROM donations WHERE user_id = $1 ORDER BY id DESC LIMIT 1), 
+                (NOW() + interval '{date_to} day'));
+                """
+            await self.pool.execute(sql, user_id)
+            logger.success(f'{user_id} - Successfully added to database[subscriptions]!')
+        except Exception as err:
+            logger.exception(f'{user_id} - Unknown error while adding to database[subscriptions]\n'
+                             f'More details:\n'
+                             f'{err}')
