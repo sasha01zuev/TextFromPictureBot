@@ -11,6 +11,8 @@ from loader import dp, db, bot
 
 @dp.message_handler(Command('mass_mailing'), user_id=MAIN_ADMIN)
 async def mass_mailing(message: types.Message, state: FSMContext):
+    """Mass mailing to users"""
+
     # /mass_mailing (Audience: [ru/en/uk/all]) (Photo: [true/false]) (First_button(Optional): [Button_name-link])
     # (Second_button(Optional): [Button_name-link]) (Third_button(Optional): [Button_name-link])
     args = message.get_args().split()
@@ -68,6 +70,8 @@ async def mass_mailing(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state="ConfirmingTextMessage")  # Text
 async def confirming_text(message: types.Message, state: FSMContext):
+    """Confirming text mass mailing"""
+
     state_data = await state.get_data()
     buttons = (state_data['first_button'], state_data['second_button'], state_data['third_button'])
     message_text = message.text
@@ -92,6 +96,8 @@ async def confirming_photo_text(message: types.Message, state: FSMContext):
 
 @dp.message_handler(content_types=ContentType.PHOTO, state='ConfirmingPhotoTextMessage')  # Photo + Text
 async def confirming_photo_text(message: types.Message, state: FSMContext):
+    """Confirming photo+text mass mailing"""
+
     state_data = await state.get_data()
     buttons = (state_data['first_button'], state_data['second_button'], state_data['third_button'])
     photo_text = message.caption
@@ -112,6 +118,8 @@ async def confirming_photo_text(message: types.Message, state: FSMContext):
 
 @dp.callback_query_handler(text="confirm_mass_mailing", state="ConfirmingTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
+    """Text mass mailing confirmed"""
+
     await call.answer(cache_time=5)
     await call.message.delete()
     state_data = await state.get_data()
@@ -124,8 +132,8 @@ async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
     sent = 0
     not_sent = 0
 
-    if users:
-        for user in users:
+    if users:  # If user exist in database
+        for user in users:  # Enumeration of users
             try:
                 await bot.send_message(chat_id=int(user['user_id']), text=f'{message_text}',
                                        reply_markup=mass_mailing_keyboard)
@@ -135,15 +143,18 @@ async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
 
         await call.message.answer(f'Отправленно: {sent} сообщений\n'
                                   f'Не отправлено: {not_sent} сообщений')
-    else:
+    else:  # If users not exist in database for chosen language scope
         await call.message.answer(f'Нету пользователей с языком {audience}!')
     await state.finish()
 
 
 @dp.callback_query_handler(text="confirm_mass_mailing", state="ConfirmingPhotoTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
+    """Photo+Text mass mailing confirmed"""
+
     await call.answer(cache_time=5)
     await call.message.delete()
+
     state_data = await state.get_data()
     audience = state_data['audience']
     mass_mailing_keyboard = state_data['keyboard']
@@ -155,8 +166,8 @@ async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
     sent = 0
     not_sent = 0
 
-    if users:
-        for user in users:
+    if users:  # If user exist in database
+        for user in users:  # Enumeration of users
             try:
                 await bot.send_photo(chat_id=int(user['user_id']), photo=photo_id,
                                      caption=f'{message_text if message_text else ""}',
@@ -167,6 +178,6 @@ async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
 
         await call.message.answer(f'Отправленно: {sent} сообщений\n'
                                   f'Не отправлено: {not_sent} сообщений')
-    else:
+    else:  # If users not exist in database for chosen language scope
         await call.message.answer(f'Нету пользователей с языком {audience}!')
     await state.finish()

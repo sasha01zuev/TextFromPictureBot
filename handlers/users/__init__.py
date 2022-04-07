@@ -12,6 +12,7 @@ from .donate import dp
 from .help import dp
 from .change_language import dp
 from .message_to_admin import dp
+from .check_channel_subscription import dp
 
 
 from .echo import dp

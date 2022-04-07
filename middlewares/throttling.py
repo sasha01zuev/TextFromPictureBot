@@ -9,7 +9,7 @@ from aiogram.utils.exceptions import Throttled
 
 class ThrottlingMiddleware(BaseMiddleware):
     """
-    Simple middleware
+    Anti-spam message throttling
     """
 
     def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):

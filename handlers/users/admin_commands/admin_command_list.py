@@ -7,6 +7,8 @@ from loader import dp
 
 @dp.message_handler(Command('admin_command_list'), user_id=ADMINS_ID)
 async def admin_command_list(message: types.Message):
+    """Getting command list for admins"""
+
     user_id = message.from_user.id
 
     if int(user_id) == int(MAIN_ADMIN):

@@ -1,16 +1,16 @@
 from aiogram.dispatcher.filters import Command
 from aiogram.types import Message
 
-from loader import dp, db, _
+from keyboards.inline import donate_keyboard
+from loader import dp, _
 from utils.misc import rate_limit
-from keyboards.inline import language_keyboard, donate_keyboard
-import aiohttp
-from data.config import CRYPTO_PAY_API_TOKEN
 
 
-@rate_limit(limit=5)  # Anti-spam
+@rate_limit(limit=2)  # Anti-spam
 @dp.message_handler(Command("donate"))
 async def donate(message: Message):
+    """Command donate"""
+
     await message.answer(_('To support us or get a paid subscription, you need to register in the official telegram '
                            'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
                            '- If you chose "support us" -- you can choose any amount to donate\n\n'

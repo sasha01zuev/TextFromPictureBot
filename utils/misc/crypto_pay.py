@@ -1,7 +1,10 @@
 import aiohttp
+from loguru import logger
 
 
 async def get_api_response(url, api_key):
+    """Async function to get/post requests from/to HTTP or HTTPS"""
+
     headers = {
         'Crypto-Pay-API-Token': api_key
     }
@@ -30,6 +33,7 @@ class CryptoPay:
         for exchange in response['result']:
             if exchange['source'] == source and exchange['target'] == target:
                 return round(float(1 / float(exchange['rate'])), 3)
+        logger.error(f"{source}/{target} - Exchange NOT FOUND")
 
     async def create_invoice(self, asset: str, amount: float, description: str = None, hidden_message: str = None,
                              paid_btn_name: str = None, paid_btn_url: str = None, payload: str = None,
@@ -53,10 +57,11 @@ class CryptoPay:
                      f'{payload}{allow_comments}{allow_anonymous}{expires_in}'
         url = self.url+method+parameters
         response = await get_api_response(url, self.api_key)
-        print(response)
+
+        logger.debug(f'CREATING INVOICE RESPONSE: {response}')
+
         if response['ok']:
             return response['result']
-        print(response['error']['name'])
         return None
 
     async def get_paid_invoice(self, invoice_id: str) -> list or None:
@@ -65,6 +70,8 @@ class CryptoPay:
         status = '&status=paid'
         url = self.url+method+invoice_id+status
         response = await get_api_response(url, self.api_key)
+
+        logger.debug(f'PAID INVOICE: {response}')
 
         if response['result']['items']:
             return response['result']['items']

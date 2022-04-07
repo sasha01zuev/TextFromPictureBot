@@ -7,6 +7,8 @@ from states import ConfirmMsgToAdmin
 
 @dp.message_handler(state=ConfirmMsgToAdmin.SetMessageType)
 async def send_message(message: Message, state: FSMContext):
+    """Function for sending message to admin"""
+
     data = await state.get_data()
     message_type = data.get("type")
     await bot.send_message(MAIN_ADMIN, f'Тип сообщения: {message_type}\n'

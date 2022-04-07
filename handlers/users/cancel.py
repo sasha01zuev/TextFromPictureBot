@@ -5,22 +5,24 @@ from keyboards.inline import donate_keyboard
 from loader import dp, _
 import os
 
+"""Functions for cancel button and finishing states"""
+
 
 @dp.callback_query_handler(text="cancel")
 async def cancel(call: CallbackQuery):
-    await call.answer(text=_('✅ Canceled'))
+    await call.answer(cache_time=1, text=_('✅ Canceled'))
     await call.message.delete()
 
 
 @dp.callback_query_handler(text="cancel_mass_mailing")
 async def confirm_mass_mailing(call: CallbackQuery):
-    await call.answer(text='✅ Canceled')
+    await call.answer(cache_time=1, text='✅ Canceled')
     await call.message.delete()
 
 
 @dp.callback_query_handler(text='cancel', state='ConfirmLangPhotoText')
 async def confirm_language_photo_text(call: CallbackQuery, state: FSMContext):
-    await call.answer(text='✅ Canceled')
+    await call.answer(cache_time=1, text='✅ Canceled')
     await call.message.delete()
 
     state_data = await state.get_data()
@@ -32,21 +34,21 @@ async def confirm_language_photo_text(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text="cancel_mass_mailing", state="ConfirmingTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
-    await call.answer(text='✅ Canceled')
+    await call.answer(cache_time=1, text='✅ Canceled')
     await call.message.delete()
     await state.finish()
 
 
 @dp.callback_query_handler(text="cancel_mass_mailing", state="ConfirmingPhotoTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
-    await call.answer(text='✅ Canceled')
+    await call.answer(cache_time=1, text='✅ Canceled')
     await call.message.delete()
     await state.finish()
 
 
 @dp.callback_query_handler(text='cancel', state='Donate_SupportUs')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(
@@ -62,7 +64,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text='cancel', state='Donate_PaidSubscription')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(
@@ -78,7 +80,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text='cancel', state='GetAmountDonate')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(
@@ -94,7 +96,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text='cancel', state='PaidSubscription_Cryptocurrency')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(
@@ -110,7 +112,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text='cancel', state='ConfirmPayAmount')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(
@@ -126,7 +128,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text='cancel', state='PaymentConfirmed')
 async def cancel(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=5)
+    await call.answer(cache_time=1)
     await state.finish()
 
     await call.message.edit_text(

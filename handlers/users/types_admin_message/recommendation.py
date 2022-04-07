@@ -6,7 +6,7 @@ from states import ConfirmMsgToAdmin
 
 
 @dp.callback_query_handler(text="recommendation")
-async def question_type(call: CallbackQuery, state: FSMContext):
+async def message_type(call: CallbackQuery, state: FSMContext):
     await call.answer(cache_time=5)
     await call.message.edit_text(_('Input message below ⬇'))
     await ConfirmMsgToAdmin.SetMessageType.set()

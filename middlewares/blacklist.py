@@ -4,7 +4,8 @@ from aiogram.dispatcher.middlewares import BaseMiddleware
 
 
 class SetBlacklist(BaseMiddleware):
-    """Tracker of user last action"""
+    """Middleware class if user in blacklist"""
+
     async def on_process_message(self, message: types.Message, data: dict):
         from loader import db, bot, _
 

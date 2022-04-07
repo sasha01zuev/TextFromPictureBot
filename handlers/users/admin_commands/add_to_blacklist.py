@@ -9,6 +9,8 @@ from loguru import logger
 
 @dp.message_handler(Command('autb'), user_id=ADMINS_ID)
 async def add_user_to_blacklist(message: types.Message):
+    """Adding user to blacklist"""
+
     user_id = message.get_args()
     admin_id = message.from_user.id
     admin_username = message.from_user.username
@@ -18,17 +20,17 @@ async def add_user_to_blacklist(message: types.Message):
         user_id = int(user_id)
         user = await db.get_user(user_id)
 
-        if user:
-            if user in ADMINS_ID and admin_id != MAIN_ADMIN:
+        if user:  # If user exist in database
+            if user in ADMINS_ID and admin_id != MAIN_ADMIN:  # If admin try to block main admin
                 await message.answer('Ты не можешь блокировать администрацию')
-            else:
+            else:  # If user successfully added to blacklist
                 await db.add_user_to_blacklist(user_id)
                 await message.answer('Успешно добавлено!')
                 logger.info(f'{user_id} добавлен в чёрный список админом {admin_id} '
                             f'{admin_username} {admin_fullname}!')
-        else:
+        else:  # If wrong user username
             await message.answer('Не правильный ID пользователя')
-    except asyncpg.exceptions.UniqueViolationError:
+    except asyncpg.exceptions.UniqueViolationError:  # If user has already added to blacklist
         await message.answer('Пользователь уже добавлен в чёрный список!')
     except Exception as err:
         await message.answer(f"Ошибка!\n"

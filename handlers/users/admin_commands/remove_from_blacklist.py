@@ -9,6 +9,8 @@ from loguru import logger
 
 @dp.message_handler(Command('rufb'), user_id=ADMINS_ID)
 async def remove_user_from_blacklist(message: types.Message):
+    """Removing users from blacklist"""
+
     user_id = message.get_args()
     admin_id = message.from_user.id
     admin_username = message.from_user.username
@@ -18,10 +20,10 @@ async def remove_user_from_blacklist(message: types.Message):
         user_id = int(user_id)
         in_blacklist = await db.get_user_from_blacklist(user_id)
 
-        if in_blacklist:
+        if in_blacklist:  # If user in blacklist
             await db.remove_user_from_blacklist(user_id)
             await message.answer('Успешно удален из чёрного списка!')
-        else:
+        else:  # If user not in blacklist
             await message.answer('Данного пользователя нету в чёрном списке!')
     except Exception as err:
         await message.answer(f"Ошибка!\n"
