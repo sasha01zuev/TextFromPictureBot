@@ -56,7 +56,7 @@ async def getting_picture(message: Message, state: FSMContext):
                     try:  # If such a photo does not yet exist in the database
                         await db.add_user_photo(user_id, photo_id)
 
-                        await message.answer(_('Choose the language of the text on the photo:'),
+                        await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
                                              reply_markup=photo_text_language_keyboard)
 
                         await state.set_state('ConfirmLangPhotoText')
@@ -68,14 +68,14 @@ async def getting_picture(message: Message, state: FSMContext):
                         photo_text = await db.get_photo(photo_id)
 
                         if photo_text:  # If text of the photo exist in database
-                            await message.answer(photo_text)
+                            await message.answer(f'<code>{photo_text}</code>')
                             os.remove(photo_path)
                             logger.success(f"{user_id} - Photo converted (Photo was in db)\n"
                                            f"Text - True\n"
                                            f"photo_id - {photo_id}\n"
                                            f"Paid subscription - False")
                         else:
-                            await message.answer(_('Choose the language of the text on the photo:'),
+                            await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
                                                  reply_markup=photo_text_language_keyboard)
 
                             await state.set_state('ConfirmLangPhotoText')
@@ -84,13 +84,14 @@ async def getting_picture(message: Message, state: FSMContext):
                                         f'Paid subscription - False\n'
                                         f'photo_id - {photo_id}')
                 except Exception as err:
-                    await message.answer(_('Oops, some unknown error while getting photo'))
+                    await message.answer(_('😲 <b>Oops, some unknown error while getting the photo!</b>\n'))
                     logger.exception(f'{user_id} - Unknown error\n'
                                      f'Paid subscription - False\n'
                                      f'More details:\n{err}')
             else:  # If user has reached the request limit for the day
-                await message.answer(_('You have reached your daily limit (5 photos/day)! Subscription needed!\n'
-                                       'More information here -> /donate'))
+                await message.answer(_('❕<b>You have reached your daily limit (5 photos/day)! '
+                                       'Subscription needed!</b>\n\n'
+                                       '<b>More information here</b> → /donate'))
                 logger.info(f'{user_id} - user has reached the request limit for the day')
         else:  # If user has a paid subscription
             try:
@@ -102,7 +103,7 @@ async def getting_picture(message: Message, state: FSMContext):
                 try:  # If such a photo does not yet exist in the database
                     await db.add_user_photo(user_id, photo_id)
 
-                    await message.answer(_('Choose the language of the text on the photo:'),
+                    await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
                                          reply_markup=photo_text_language_keyboard)
 
                     await state.set_state('ConfirmLangPhotoText')
@@ -114,14 +115,14 @@ async def getting_picture(message: Message, state: FSMContext):
                     photo_text = await db.get_photo(photo_id)
 
                     if photo_text:  # If text of the photo exist in database
-                        await message.answer(photo_text)
+                        await message.answer(f'<code>{photo_text}</code>')
                         os.remove(photo_path)
                         logger.success(f"{user_id} - Photo converted (Photo was in db)\n"
                                        f"Text - True\n"
                                        f"photo_id - {photo_id}\n"
                                        f"Paid subscribe - True")
                     else:
-                        await message.answer(_('Choose the language of the text on the photo:'),
+                        await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
                                              reply_markup=photo_text_language_keyboard)
 
                         await state.set_state('ConfirmLangPhotoText')
@@ -130,14 +131,14 @@ async def getting_picture(message: Message, state: FSMContext):
                                     f'Paid subscription - True\n'
                                     f'photo_id - {photo_id}')
             except Exception as err:
-                await message.answer(_('Oops, some unknown error'))
+                await message.answer(_('😲 <b>Oops, some unknown error while getting the photo!</b>\n'))
                 logger.exception(f'{user_id} - Unknown error while getting photo\n'
                                  f'Paid subscription - True\n'
                                  f'More details:\n{err}')
     else:
-        await message.answer(_('⚠ OCR is available only for those who are subscribed to our channel!\n\n'
-                               'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>, '
-                               'use the buttons below ↡'),
+        await message.answer(_('⚠ <b>OCR is available only for those who are subscribed to our channel!\n\n'
+                               'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>. '
+                               'Use the buttons below</b> ↡'),
                              reply_markup=check_subscription_keyboard,
                              disable_web_page_preview=True)
         logger.info(f'{user_id} - user not subscribed to the bot channel')
@@ -164,14 +165,14 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
         cv2.waitKey()
 
         if text_from_photo:  # If the text in the picture was found
-            await call.message.edit_text(f'{text_from_photo}')
+            await call.message.edit_text(f'<code>{text_from_photo}</code>')
             await db.add_photo_text(user_id=user_id, photo_id=photo_id, text=text_from_photo)
             logger.success(f"{user_id} - Photo converted\n"
                            f"Text - True\n"
                            f"Language - {photo_lang}\n"
                            f"photo_id - {photo_id}\n")
         else:  # If text on the picture was not found
-            await call.message.edit_text(_('There is no text on the photo!'))
+            await call.message.edit_text(_('❕<b>There is no text on the photo!</b>'))
             await db.add_photo_text(user_id=user_id, photo_id=photo_id, text=_('There is no text on the photo!'))
             logger.success(f"{user_id} - Photo converted\n"
                            f"Text - False\n"
@@ -189,8 +190,8 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
                          f'{response}')
 
             if '180 number of times within 3600 seconds' in response:  # If more than 180 requests per hour
-                await call.message.edit_text(_('Bot is overloaded now! Will be available within the hour'
-                                               'Or sign up for a paid subscription - /donate'))
+                await call.message.edit_text(_('⚠ <b>Bot is overloaded now! Will be available within the hour'
+                                               'Or sign up for a paid subscription - /donate</b>'))
                 logger.info(f'{user_id} - OCR_API exception: 180 requests per hour')
             else:
                 is_error = bool(response.get("IsErroredOnProcessing"))
@@ -201,32 +202,32 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
                                  f'Error message: {error_message}')
 
                     if 'file size exceeds' in error_message.lower():  # Big photo size error
-                        await call.message.edit_text(_('The photo size is too big! '
+                        await call.message.edit_text(_('⚠ <b>The photo size is too big! '
                                                        'Try to reduce the size of the photo or send another photo!'
-                                                       'Or sign up for a paid subscription - /donate'))
+                                                       'Or sign up for a paid subscription - /donate</b>'))
                     elif 'timed out waiting' in error_message.lower():  # Server overloading error
-                        await call.message.edit_text(_('Server overloaded, please try again later'
-                                                       'Or sign up for a paid subscription - /donate'))
+                        await call.message.edit_text(_('⚠ <b>Server overloaded, please try again later'
+                                                       'Or sign up for a paid subscription - /donate</b>'))
                     else:
-                        await call.message.edit_text(_('An unexpected error has occurred'))
+                        await call.message.edit_text(_('⚠ <b>An unexpected error has occurred</b>'))
                 else:
                     text_from_photo = response.get("ParsedResults")[0].get("ParsedText")
 
                     if text_from_photo:  # If text on the picture was found
-                        await call.message.edit_text(f'{text_from_photo}')
+                        await call.message.edit_text(f'<code>{text_from_photo}</code>')
                         await db.add_photo_text(user_id=user_id, photo_id=photo_id, text=text_from_photo)
                         logger.success(f"{user_id} - Photo converted\n"
                                        f"Text - True\n"
                                        f"Language - {photo_lang}\n"
                                        f"photo_id - {photo_id}\n")
                     else:  # If text on the picture was not found
-                        await call.message.edit_text(_('There is no text on the photo!'))
+                        await call.message.edit_text(_('❕ <b>There is no text on the photo!</b>'))
                         logger.success(f"{user_id} - Photo converted\n"
                                        f"Text - False\n"
                                        f"Language - {photo_lang}\n"
                                        f"photo_id - {photo_id}\n")
         except Exception as err:
-            await call.message.edit_text(_('An unexpected error has occurred'))
+            await call.message.edit_text(_('😲 <b>An unexpected error has occurred</b>'))
             logger.exception(f'{user_id} - Unknown error while getting OCR RESPONSE (PHOTO)\n'
                              f'More details:\n{err}')
 

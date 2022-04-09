@@ -49,13 +49,13 @@ class Database:
         except:
             return None
 
-    async def add_user_info(self, user_id: int):
+    async def add_user_info(self, user_id: int, lang_code: str = 'en'):
         try:
             sql = """
-               INSERT INTO user_info(user_id, registration_date) 
-               VALUES($1, NOW());
+               INSERT INTO user_info(user_id, registration_date, lang_code) 
+               VALUES($1, NOW(), $2);
                """
-            await self.pool.execute(sql, user_id)
+            await self.pool.execute(sql, user_id, lang_code)
             logger.success(f'{user_id} - Successfully added to database[user_info]!')
         except Exception as err:
             logger.exception(f'{user_id} - Unknown error while adding user to database[user_info]\n'

@@ -16,13 +16,13 @@ async def cancel(call: CallbackQuery):
 
 @dp.callback_query_handler(text="cancel_mass_mailing")
 async def confirm_mass_mailing(call: CallbackQuery):
-    await call.answer(cache_time=1, text='✅ Canceled')
+    await call.answer(cache_time=1, text=_('✅ Canceled'))
     await call.message.delete()
 
 
 @dp.callback_query_handler(text='cancel', state='ConfirmLangPhotoText')
 async def confirm_language_photo_text(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=1, text='✅ Canceled')
+    await call.answer(cache_time=1, text=_('✅ Canceled'))
     await call.message.delete()
 
     state_data = await state.get_data()
@@ -34,14 +34,14 @@ async def confirm_language_photo_text(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text="cancel_mass_mailing", state="ConfirmingTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=1, text='✅ Canceled')
+    await call.answer(cache_time=1, text=_('✅ Canceled'))
     await call.message.delete()
     await state.finish()
 
 
 @dp.callback_query_handler(text="cancel_mass_mailing", state="ConfirmingPhotoTextMessage")
 async def confirm_mass_mailing(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=1, text='✅ Canceled')
+    await call.answer(cache_time=1, text=_('✅ Canceled'))
     await call.message.delete()
     await state.finish()
 
@@ -52,13 +52,15 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
@@ -68,13 +70,15 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
@@ -84,13 +88,15 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
@@ -100,13 +106,15 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
@@ -116,13 +124,15 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)
 
 
@@ -132,11 +142,13 @@ async def cancel(call: CallbackQuery, state: FSMContext):
     await state.finish()
 
     await call.message.edit_text(
-        _('To support us or get a paid subscription, you need to register in the official telegram '
-          'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-          '- If you chose "support us" -- you can choose any amount to donate\n\n'
-          '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-          '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        _('<b>To support us or get a paid subscription, '
+          'you need to register in the official telegram '
+          'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+          '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+          '✅ If you have chosen "<b>Paid subscription</b>" — '
+          'you can choose several types of subscription:\n'
+          '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
-          '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+          '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
           'more servers - less load'), reply_markup=donate_keyboard)

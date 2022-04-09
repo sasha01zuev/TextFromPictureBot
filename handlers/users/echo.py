@@ -10,6 +10,7 @@ from utils.misc import rate_limit
 async def get_message(message: types.Message):
     """Receiving simple messages"""
 
-    await message.answer(_("I work with pictures only🤫"))
+    await message.answer(_("🤫 <b>I work with <a href='https://bit.ly/38DrV5Y'>photos</a> and "
+                           "<a href='https://bit.ly/3rciXmB'>links</a></b>"), disable_web_page_preview=True)
 
 

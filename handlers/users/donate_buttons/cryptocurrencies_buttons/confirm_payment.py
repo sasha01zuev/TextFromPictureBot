@@ -45,10 +45,10 @@ async def confirm_amount(call: CallbackQuery, state: FSMContext):
             row_width=1,
             inline_keyboard=[
                 [
-                    InlineKeyboardButton(text="🔗 Pay", url=pay_url)
+                    InlineKeyboardButton(text=_("🔗 Pay"), url=pay_url)
                 ],
                 [
-                    InlineKeyboardButton(text="✅ Paid",
+                    InlineKeyboardButton(text=_("✅ Paid"),
                                          callback_data='confirm_payment'),
                     cancel_button
                 ]
@@ -56,9 +56,9 @@ async def confirm_amount(call: CallbackQuery, state: FSMContext):
             ]
         )  # Link to invoice payment
 
-        await call.message.edit_text(_('Confirm payment or cancel action\n\n'
-                                       'Amount: ${amount} ({crypto_amount} {currency})\n'
-                                       'Currency: {currency}').format(amount=amount, currency=currency,
+        await call.message.edit_text(_('<b>Confirm payment or cancel action</b>\n\n'
+                                       '<b>Amount</b>: ${amount} ({crypto_amount} {currency})\n'
+                                       '<b>Currency</b>: {currency}').format(amount=amount, currency=currency,
                                                                       crypto_amount=crypto_amount),
                                      reply_markup=confirm_payment_keyboard)
         await state.set_state('PaymentConfirmed')
@@ -74,14 +74,16 @@ async def confirm_amount(call: CallbackQuery, state: FSMContext):
     else:  # If error while creating invoice
         await state.finish()
         await call.message.edit_text(_('Unknown error while generating invoice!'))
-        await call.message.answer(
-            _('To support us or get a paid subscription, you need to register in the official telegram '
-              'crypto wallet bot - @CryptoBot and top up your wallet\n\n'
-              '- If you chose "support us" -- you can choose any amount to donate\n\n'
-              '- If you have chosen "paid subscription" -- you can choose several types of subscription:\n'
-              '    · 30$/month - 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+        await call.message.edit_text(
+            _('<b>To support us or get a paid subscription, '
+              'you need to register in the official telegram '
+              'crypto wallet bot - @CryptoBot and top up your wallet</b>\n\n'
+              '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
+              '✅ If you have chosen "<b>Paid subscription</b>" — '
+              'you can choose several types of subscription:\n'
+              '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
               'more servers - less load\n'
-              '    · 60$/month - 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+              '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
               'more servers - less load'), reply_markup=donate_keyboard)
         logger.error(f'{user_id} - Invoice NOT created\n'
                      f'Paid subscription: {is_paid_subscription}\n'
@@ -111,8 +113,9 @@ async def payment_confirmed(call: CallbackQuery, state: FSMContext):
         comment = None
     except TypeError:
         comment = None
+
     if paid_invoice:  # If invoice was paid
-        await call.message.edit_text(_('Thanks for donation!'))
+        await call.message.edit_text(_('<b>THANKS FOR DONATION!</b>'))
         if is_paid_subscription:  # If paid for paid subscription
             await db.add_user_donate(user_id=user_id, amount=amount, currency=currency, message=comment)
             await db.add_user_subscription(user_id=user_id, date_to=amount)

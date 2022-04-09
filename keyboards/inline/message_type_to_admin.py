@@ -1,25 +1,26 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from loader import _
 
 message_type_keyboard = InlineKeyboardMarkup(row_width=1,
                                              inline_keyboard=[
                                                  [
-                                                     InlineKeyboardButton(text="❔ Question",
+                                                     InlineKeyboardButton(text=_("❔ Question"),
                                                                           callback_data="question")
                                                  ],
                                                  [
-                                                     InlineKeyboardButton(text="🧩 Recommendation/Suggestion",
+                                                     InlineKeyboardButton(text=_("🧩 Recommendation/Suggestion"),
                                                                           callback_data="recommendation")
                                                  ],
                                                  [
-                                                     InlineKeyboardButton(text="📊 Bug report",
+                                                     InlineKeyboardButton(text=_("📊 Bug report"),
                                                                           callback_data="bug_report")
                                                  ],
                                                  [
-                                                     InlineKeyboardButton(text="📜 Other",
+                                                     InlineKeyboardButton(text=_("📜 Other"),
                                                                           callback_data="other")
                                                  ],
                                                  [
-                                                     InlineKeyboardButton(text="⬅ Отменить",
+                                                     InlineKeyboardButton(text=_("⬅ Отменить"),
                                                                           callback_data="cancel")
                                                  ]
 

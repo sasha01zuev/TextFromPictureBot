@@ -1,3 +1,4 @@
 from aiogram.types import InlineKeyboardButton
+from loader import _
 
-cancel_button = InlineKeyboardButton(text="⬅ Cancel", callback_data="cancel")
+cancel_button = InlineKeyboardButton(text=_("⬅ Cancel"), callback_data="cancel")

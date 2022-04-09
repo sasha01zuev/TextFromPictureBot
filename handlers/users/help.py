@@ -10,6 +10,10 @@ from utils.misc import rate_limit
 async def _help(message: Message):
     """Command help"""
 
-    await message.answer(_("Send me picture and I send text from it🖼💬\n"
-                           "- Try to send precise image for more correct recognition✅\n"
-                           "- If you got non correct text, \ntry to select another background️🔲↔🔳"))
+    await message.answer(_("<b>It's a bot for fetching text from photos.</b>\n\n"
+                           "🔗 Send me link to photo which ends with .png .jpg .gif\n"
+                           "<b>For example:</b> <code>https://.../picture.png</code>\n\n"
+                           "🖼 Send me photo. Only one photo - I can't fetch text from photo-albums yet\n\n"
+                           "👆 Just tap on the text to copy it to clipboard 📋\n\n"
+                           "If you have any questions or problems, then write to our chat - t.me/TextFromImageChat "
+                           "or our admins - /message_to_admin"))

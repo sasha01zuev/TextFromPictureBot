@@ -15,6 +15,6 @@ async def send_message(message: Message, state: FSMContext):
                                        f'От: @{message.from_user.username}\n'
                                        f'ID: {message.from_user.id}\n'
                                        f'Сообщение:\n{message.text}')
-    await message.answer(_('✅ Message sent successfully! Expect a response soon!'), reply_markup=ReplyKeyboardRemove())
+    await message.answer(_('✅ <b>Message sent successfully! Expect a response soon!</b>'), reply_markup=ReplyKeyboardRemove())
 
     await state.finish()

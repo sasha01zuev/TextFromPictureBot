@@ -10,5 +10,5 @@ async def support_us(call: CallbackQuery, state: FSMContext):
     """If chosen 'Paid subscription' while donate"""
 
     await call.answer(cache_time=1)
-    await call.message.edit_text(_('Choose a plan:'), reply_markup=paid_subscription_plan_keyboard)
+    await call.message.edit_text(_('<b>Choose a plan:</b>'), reply_markup=paid_subscription_plan_keyboard)
     await state.set_state('Donate_PaidSubscription')
