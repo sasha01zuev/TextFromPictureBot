@@ -1,0 +1,412 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-04-10 02:10+0300\n"
+"PO-Revision-Date: 2022-04-10 02:10+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: handlers/users/cancel.py:13 handlers/users/cancel.py:19
+#: handlers/users/cancel.py:25 handlers/users/cancel.py:37
+#: handlers/users/cancel.py:44
+msgid "✅ Canceled"
+msgstr "✅ Отменено"
+
+#: handlers/users/cancel.py:55 handlers/users/cancel.py:73
+#: handlers/users/cancel.py:91 handlers/users/cancel.py:109
+#: handlers/users/cancel.py:127 handlers/users/cancel.py:145
+#: handlers/users/donate.py:14
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:78
+msgid ""
+"<b>To support us or get a paid subscription, you need to register in the "
+"official telegram crypto wallet bot - @CryptoBot and top up your "
+"wallet</b>\n"
+"\n"
+"✅ If you chosen \"<b>Support us</b>\" — you can choose any amount to "
+"donate\n"
+"\n"
+"✅ If you have chosen \"<b>Paid subscription</b>\" — you can choose "
+"several types of subscription:\n"
+"    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo "
+"size limit - 5MB, more servers - less load\n"
+"    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo "
+"size limit - 100MB, more servers - less load"
+msgstr ""
+"<b>Чтобы поддержать нас или оформить платную подписку, вам нужно зарегистрироваться в "
+"официальном крипто-кошельке от телеграм - @CryptoBot и пополнить ваш "
+"кошелёк</b>\n"
+"\n"
+"✅ Если вы выбрали \"<b>Поддержать нас</b>\" — вы можете выбрать любую сумму для "
+"пожертвования\n"
+"\n"
+"✅ Если вы выбрали \"<b>Платная подписка</b>\" — вы можете выбрать "
+"один из типов подписки:\n"
+"    · <b>30$/месяц</b> — 3000 фото/час, 125.000 фото/месяц, максимальный "
+"размер фото - 5MB, больше серверов - меньше нагрузка\n"
+"    · <b>60$/месяц</b> — 6000 фото/час, 250.000 фото/месяц, максимальный "
+"размер фото - 100MB, отдельный сервер - мгновенный ответ"
+
+#: handlers/users/change_language.py:14 handlers/users/start.py:35
+msgid "<b>Choose your language:</b>"
+msgstr "<b>Выберите язык бота:</b>"
+
+#: handlers/users/check_channel_subscription.py:16
+msgid "✅ Confirmed"
+msgstr "✅ Подтверждено"
+
+#: handlers/users/check_channel_subscription.py:19
+msgid "❗ Not confirmed"
+msgstr "❗ Не подтверждено"
+
+#: handlers/users/contacts.py:13
+msgid ""
+"<b>CONTACTS:\n"
+"\n"
+"👨‍💻 Chief Administrator: @Sasha_Zuev\n"
+"\n"
+"💬 All updates and all news will be in our channel: t.me/TextFromImage\n"
+"\n"
+"👥 Our chat: t.me/TextFromImageChat</b>"
+msgstr ""
+"<b>КОНТАКТЫ:\n"
+"\n"
+"👨‍💻 Главный Администратор: @Sasha_Zuev\n"
+"\n"
+"💬 Все обновления и все новости в нашем канале: t.me/TextFromImage\n"
+"\n"
+"👥 Наш чат: t.me/TextFromImageChat</b>"
+
+#: handlers/users/echo.py:13
+msgid ""
+"🤫 <b>I work with <a href='https://bit.ly/38DrV5Y'>photos</a> or <a "
+"href='https://bit.ly/3rciXmB'>links</a> to the photo!</b>"
+msgstr ""
+"🤫 <b>Я принимаю только <a href='https://bit.ly/3JqMPSx'>фото</a> или <a "
+"href='https://bit.ly/3vaoc7D'>URL</a> на фото!</b>"
+
+#: handlers/users/getting_link.py:66 handlers/users/getting_link.py:84
+#: handlers/users/getting_link.py:108 handlers/users/getting_link.py:126
+#: handlers/users/getting_picture.py:59 handlers/users/getting_picture.py:78
+#: handlers/users/getting_picture.py:106 handlers/users/getting_picture.py:125
+msgid "<b>Choose the language of the text on the photo:</b>"
+msgstr "<b>Выберите язык текста на фото:</b>"
+
+#: handlers/users/getting_link.py:93 handlers/users/getting_link.py:135
+#: handlers/users/getting_picture.py:87 handlers/users/getting_picture.py:134
+msgid "😲 <b>Oops, some unknown error while getting the photo!</b>\n"
+msgstr "😲 <b>Ууупс, вылезла какая-то неизвестная ошибка, пока получал фото!</b>\n"
+
+#: handlers/users/getting_link.py:98 handlers/users/getting_picture.py:92
+msgid ""
+"❕<b>You have reached your daily limit (5 photos/day)! Subscription "
+"needed!</b>\n"
+"\n"
+"<b>More information here</b> → /donate"
+msgstr ""
+"❕<b>Вы достигли суточного лимита (5 фото/день)! Нужно оформить подписку, "
+"чтобы использовать бота на всю мощность!</b>\n"
+"\n"
+"<b>Больше информации здесь</b> → /donate"
+
+#: handlers/users/getting_link.py:140 handlers/users/getting_picture.py:139
+msgid ""
+"⚠ <b>OCR is available only for those who are subscribed to our channel!\n"
+"\n"
+"Subscribe to <a href=\"https://t.me/TextFromImage\">TEXT FROM IMAGE</a>. "
+"Use the buttons below</b> ↡"
+msgstr ""
+"⚠ <b>OCR доступен только для тех, кто подписан на наш канал!\n"
+"\n"
+"Подпишитесь на <a href=\"https://t.me/TextFromImage\">TEXT FROM IMAGE</a>. "
+"Используйте кнопки ниже</b> ↡"
+
+#: handlers/users/getting_link.py:153 handlers/users/getting_picture.py:152
+msgid "⏳ Wait a bit..."
+msgstr "⏳ Подождите немного..."
+
+#: handlers/users/getting_link.py:178 handlers/users/getting_picture.py:175
+msgid "❕<b>There is no text on the photo!</b>"
+msgstr "❕<b>На фото нет текста!</b>"
+
+#: handlers/users/getting_link.py:179 handlers/users/getting_link.py:227
+#: handlers/users/getting_picture.py:176
+msgid "There is no text on the photo!"
+msgstr "❕<b>На фото нет текста!</b>"
+
+#: handlers/users/getting_link.py:194
+msgid ""
+"⚠ <b>Bot is overloaded now! Will be available within the hour Or sign up "
+"for a paid subscription - /donate</b>"
+msgstr ""
+"⚠ <b>Бот сейчас перегружен! Будет доступен в течение часа или вы можете "
+"оформить платную подписку - /donate</b>"
+
+#: handlers/users/getting_link.py:206 handlers/users/getting_picture.py:205
+msgid ""
+"⚠ <b>The photo size is too big! Try to reduce the size of the photo or "
+"send another photo! Or sign up for a paid subscription - /donate</b>"
+msgstr ""
+"⚠ <b>Размер фото слишком большой! Попробуйте уменьшить размер фото или "
+"пришлите другое фото! Или вы можете оформить платную подписку - /donate</b>"
+
+#: handlers/users/getting_link.py:210 handlers/users/getting_picture.py:209
+msgid ""
+"⚠ <b>Server overloaded, please try again later! Or sign up for a paid "
+"subscription - /donate</b>"
+msgstr ""
+"⚠ <b>Сервер перегружен, попробуйте позже! Или оформите платную "
+"подписку - /donate</b>"
+
+#: handlers/users/getting_link.py:213 handlers/users/getting_picture.py:212
+msgid "⚠ <b>An unexpected error has occurred</b>"
+msgstr "⚠ <b>Произошла непредвиденная ошибка</b>"
+
+#: handlers/users/getting_link.py:225 handlers/users/getting_picture.py:224
+msgid "❕ <b>There is no text on the photo!</b>"
+msgstr "❕ <b>На фото нет текста!</b>"
+
+#: handlers/users/getting_link.py:233 handlers/users/getting_picture.py:230
+msgid "😲 <b>An unexpected error has occurred</b>"
+msgstr "😲 <b>Произошла непредвиденная ошибка</b>"
+
+#: handlers/users/getting_picture.py:193
+msgid ""
+"⚠ <b>Bot is overloaded now! Will be available within the hour! Or sign up"
+" for a paid subscription - /donate</b>"
+msgstr ""
+"⚠ <b>Бот сейчас перегружен! Будет доступен в течение часа! Или вы можете оформить"
+" платную подписку - /donate</b>"
+
+#: handlers/users/help.py:13
+msgid ""
+"<b>It's a bot for fetching text from photos.</b>\n"
+"\n"
+"🔗 Send me link to photo which ends with .png .jpg .gif\n"
+"<b>For example:</b> <code>https://.../picture.png</code>\n"
+"\n"
+"🖼 Send me photo. Only one photo - I can't fetch text from photo-albums "
+"yet\n"
+"\n"
+"👆 Just tap on the text to copy it to clipboard 📋\n"
+"\n"
+"If you have any questions or problems, then write to our chat - "
+"t.me/TextFromImageChat or our admins - /message_to_admin"
+msgstr ""
+"<b>Это бот для извлечения текста из фотографий.</b>\n"
+"\n"
+"🔗 Пришлите мне URL ссылку на фото, которое заканчивается на .png .jpg .gif\n"
+"<b>Например:</b> <code>https://.../picture.png</code>\n"
+"\n"
+"🖼 Пришлите мне фото. Только одно фото - не могу вытащить текст из фотоальбомов "
+"пока что\n"
+"\n"
+"👆 Просто нажмите на текст, чтобы скопировать его в буфер обмена 📋\n"
+"\n"
+"Если у вас есть вопросы или возникли проблемы, то пишите в наш чат - "
+"t.me/TextFromImageChat или нашим админам - /message_to_admin"
+
+#: handlers/users/message_to_admin.py:14
+msgid "<b>Select message type:</b>"
+msgstr "<b>Выберите тип сообщения:</b>"
+
+#: handlers/users/start.py:30
+msgid ""
+"Hi, {first_name}😃\n"
+"\n"
+"I can convert <u>photo to text</u>📝\n"
+"Send me <b>photo</b> or <b>URL to photo</b> with text and I will try to "
+"make it right🗯"
+msgstr ""
+"Привет, {first_name}😃\n"
+"\n"
+"Я могу извлечь <u>текст из фото</u>📝\n"
+"Отправь мне <b>фото</b> или <b>URL ссылку на фото</b> с текстом и я попробую сделать "
+"это правильно🗯"
+
+#: handlers/users/start.py:37
+msgid "You have already been registered!"
+msgstr "Вы уже зарегистрированы!"
+
+#: handlers/users/donate_buttons/paid_subscription.py:13
+msgid "<b>Choose a plan:</b>"
+msgstr "<b>Выберите план подписки:</b>"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/paid_subscription_buttons/choose_cryptocurrency.py:15
+#: handlers/users/donate_buttons/support_us.py:11
+msgid "<b>Choose a cryptocurrency:</b>"
+msgstr "<b>Выберите криптовалюту:</b>"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:36
+msgid "Donation for the @{bot_username}"
+msgstr "Оплата для @{bot_username}"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:48
+msgid "🔗 Pay"
+msgstr "🔗 Оплатить"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:51
+msgid "✅ Paid"
+msgstr "✅ Оплатил"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:59
+msgid ""
+"<b>Confirm payment or cancel action</b>\n"
+"\n"
+"<b>Amount</b>: ${amount} ({crypto_amount} {currency})\n"
+"<b>Currency</b>: {currency}"
+msgstr ""
+"<b>Подтвердите оплату или отмените действие</b>\n"
+"\n"
+"<b>Сумма</b>: ${amount} ({crypto_amount} {currency})\n"
+"<b>Валюта</b>: {currency}"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:76
+msgid "Unknown error while generating invoice!"
+msgstr "Возникла неизвестная ошибка пока генерировал оплату!"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:118
+msgid "<b>THANKS FOR DONATION!</b>"
+msgstr "<b>СПАСИБО ЗА ОПЛАТУ!</b>"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:136
+msgid "Not paid!"
+msgstr "Не оплачено!"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/paid_subscription_buttons/choose_cryptocurrency.py:31
+msgid ""
+"<b>Confirm your subscription plan or cancel the action:</b>\n"
+"\n"
+"<b>Currency:</b> {currency}\n"
+"<b>Amount:</b> ${amount}"
+msgstr ""
+"<b>Подтвердите план подписки или отмените действие:</b>\n"
+"\n"
+"<b>Валюта:</b> {currency}\n"
+"<b>Сумма:</b> ${amount}"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/support_us_buttons/choose_amount.py:22
+msgid ""
+"<b>✅ {currency} currency selected\n"
+"📈 1$ - {exchange_rate} {currency}\n"
+"\n"
+"⬇ Write the donation amount in $0.5-500 below</b>"
+msgstr ""
+"<b>✅ {currency} - выбранная валюта\n"
+"📈 1$ - {exchange_rate} {currency}\n"
+"\n"
+"⬇ Напишите ниже сумму в пределах $0.5-5000</b>"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/support_us_buttons/choose_amount.py:46
+msgid "‼ <b>Enter an amount within $0.5-5000</b>"
+msgstr "‼ <b>Впишите сумму в пределах $0.5-5000</b>"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/support_us_buttons/choose_amount.py:49
+msgid ""
+"<b>Confirm the payment amount or cancel the action:</b>\n"
+"\n"
+"<b>Currency:</b> {currency}\n"
+"<b>Amount:</b> ${amount}"
+msgstr ""
+"<b>Подтвердите сумму или отмените действие:</b>\n"
+"\n"
+"<b>Валюта:</b> {currency}\n"
+"<b>Сумма:</b> ${amount}"
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/support_us_buttons/choose_amount.py:56
+msgid "‼ <b>Enter amount. For example: 1, 0.7, 55.4</b>"
+msgstr "‼ <b>Введите число. Например: 1, 0.7, 55.4</b>"
+
+#: handlers/users/types_admin_message/bug_report.py:11
+#: handlers/users/types_admin_message/other.py:11
+#: handlers/users/types_admin_message/question.py:11
+#: handlers/users/types_admin_message/recommendation.py:11
+msgid "<b>Input message below ⬇</b>"
+msgstr "<b>Впишите сообщение ниже ⬇</b>"
+
+#: handlers/users/types_admin_message/send_message.py:18
+msgid "✅ <b>Message sent successfully! Expect a response soon!</b>"
+msgstr "✅ <b>Сообщение успешно доставлено! Ожидайте ответа в ближайшее время!</b>"
+
+#: keyboards/inline/cancel_button.py:4
+msgid "⬅ Cancel"
+msgstr "⬅ Отменить"
+
+#: keyboards/inline/check_subscription.py:7
+msgid "[1] Subscribe"
+msgstr "[1] Подписаться"
+
+#: keyboards/inline/check_subscription.py:11
+msgid "[2] Check subscribe"
+msgstr "[2] Проверить подписку"
+
+#: keyboards/inline/choosing_paid_subscrption_plan.py:11
+msgid "30$/month"
+msgstr "30$/месяц"
+
+#: keyboards/inline/choosing_paid_subscrption_plan.py:16
+msgid "60$/month"
+msgstr "60$/месяц"
+
+#: keyboards/inline/confirm_pay_amount.py:10
+msgid "✅ Confirm"
+msgstr "✅ Подтвердить"
+
+#: keyboards/inline/donate.py:7
+msgid "Support us"
+msgstr "Поддержать нас"
+
+#: keyboards/inline/donate.py:11
+msgid "Paid subscription"
+msgstr "Платная подписка"
+
+#: keyboards/inline/language.py:19 keyboards/inline/message_type_to_admin.py:23
+msgid "⬅ Отменить"
+msgstr "⬅ Отменить"
+
+#: keyboards/inline/message_type_to_admin.py:7
+msgid "❔ Question"
+msgstr "❔ Вопрос"
+
+#: keyboards/inline/message_type_to_admin.py:11
+msgid "🧩 Recommendation/Suggestion"
+msgstr "🧩 Рекомендация/Предложение"
+
+#: keyboards/inline/message_type_to_admin.py:15
+msgid "📊 Bug report"
+msgstr "📊 Отчёт об ошибке"
+
+#: keyboards/inline/message_type_to_admin.py:19
+msgid "📜 Other"
+msgstr "📜 Другое"
+
+#: middlewares/blacklist.py:16 middlewares/blacklist.py:26
+msgid "You have been banned! Contact @Sasha_Zuev"
+msgstr "Вы были забанены! Контакт @Sasha_Zuev"
+
+#: middlewares/checking_user_existence.py:17
+#: middlewares/checking_user_existence.py:23
+#: middlewares/checking_user_existence.py:35
+msgid "Press /start !"
+msgstr ""
+
+#: middlewares/throttling.py:40
+msgid "🛑 So often!"
+msgstr "🛑 Слишком часто!"
+
+#: middlewares/throttling.py:42
+msgid "⏳ Wait a few seconds!"
+msgstr "⏳ Подождите несколько секунд!!"
+
