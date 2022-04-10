@@ -25,7 +25,7 @@ async def choose_amount(call: CallbackQuery, callback_data: dict, state: FSMCont
                                                                                            exchange_rate=exchange_rate),
                                  reply_markup=InlineKeyboardMarkup(row_width=1,
                                                                    inline_keyboard=[
-                                                                       [cancel_button]
+                                                                       [await cancel_button()]
                                                                    ]))
     await state.finish()
     await state.set_state('GetAmountDonate')
@@ -49,7 +49,7 @@ async def confirm_amount(message: Message, state: FSMContext):
             await message.answer(_('<b>Confirm the payment amount or cancel the action:</b>\n\n'
                                    '<b>Currency:</b> {currency}\n'
                                    '<b>Amount:</b> ${amount}').format(amount=amount, currency=currency),
-                                 reply_markup=confirm_pay_amount_keyboard)
+                                 reply_markup=await confirm_pay_amount_keyboard())
             await state.set_state('ConfirmPayAmount')
             await state.update_data(currency=currency, amount=amount, is_paid_subscription=False)
     except ValueError:

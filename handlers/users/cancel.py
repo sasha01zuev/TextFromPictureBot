@@ -61,7 +61,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())
 
 
 @dp.callback_query_handler(text='cancel', state='Donate_PaidSubscription')
@@ -79,7 +79,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())
 
 
 @dp.callback_query_handler(text='cancel', state='GetAmountDonate')
@@ -97,7 +97,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())
 
 
 @dp.callback_query_handler(text='cancel', state='PaidSubscription_Cryptocurrency')
@@ -115,7 +115,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())
 
 
 @dp.callback_query_handler(text='cancel', state='ConfirmPayAmount')
@@ -133,7 +133,7 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())
 
 
 @dp.callback_query_handler(text='cancel', state='PaymentConfirmed')
@@ -151,4 +151,4 @@ async def cancel(call: CallbackQuery, state: FSMContext):
           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
           'more servers - less load\n'
           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-          'more servers - less load'), reply_markup=donate_keyboard)
+          'more servers - less load'), reply_markup=await donate_keyboard())

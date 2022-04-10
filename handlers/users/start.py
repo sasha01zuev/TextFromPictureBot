@@ -3,14 +3,13 @@ from aiogram.types import Message
 
 from loader import dp, db, _
 from utils.misc import rate_limit
+from keyboards.inline.language import language_keyboard
 
 
 @rate_limit(limit=2)  # Anti-spam
 @dp.message_handler(Command("start"))
 async def start(message: Message):
     """Registration a new user in database"""
-
-    from keyboards.inline import language_keyboard
 
     user_id = message.from_user.id
     username = message.from_user.username
@@ -33,6 +32,6 @@ async def start(message: Message):
                                "Send me <b>photo</b> or <b>URL to photo</b> with text "
                                "and I will try to make it right🗯").format(first_name=first_name))
 
-        await message.answer(_('<b>Choose your language:</b>'), reply_markup=language_keyboard)
+        await message.answer(_('<b>Choose your language:</b>'), reply_markup=await language_keyboard())
     else:
         await message.answer(_('You have already been registered!'))

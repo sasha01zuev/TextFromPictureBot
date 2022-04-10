@@ -1,7 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
-from keyboards.inline import donate_keyboard
+from keyboards.inline import donate_keyboard, confirm_payment_keyboard
 from keyboards.inline.cancel_button import cancel_button
 from loader import dp, db, _, bot
 from utils.misc import CryptoPay
@@ -41,26 +41,11 @@ async def confirm_amount(call: CallbackQuery, state: FSMContext):
         invoice_id = invoice['invoice_id']
         pay_url = invoice['pay_url']
 
-        confirm_payment_keyboard = InlineKeyboardMarkup(
-            row_width=1,
-            inline_keyboard=[
-                [
-                    InlineKeyboardButton(text=_("🔗 Pay"), url=pay_url)
-                ],
-                [
-                    InlineKeyboardButton(text=_("✅ Paid"),
-                                         callback_data='confirm_payment'),
-                    cancel_button
-                ]
-
-            ]
-        )  # Link to invoice payment
-
         await call.message.edit_text(_('<b>Confirm payment or cancel action</b>\n\n'
                                        '<b>Amount</b>: ${amount} ({crypto_amount} {currency})\n'
                                        '<b>Currency</b>: {currency}').format(amount=amount, currency=currency,
                                                                       crypto_amount=crypto_amount),
-                                     reply_markup=confirm_payment_keyboard)
+                                     reply_markup=await confirm_payment_keyboard(pay_url=pay_url))
         await state.set_state('PaymentConfirmed')
         await state.update_data(invoice_id=invoice_id, is_paid_subscription=is_paid_subscription,
                                 amount=amount, currency=currency)
@@ -84,7 +69,7 @@ async def confirm_amount(call: CallbackQuery, state: FSMContext):
               '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
               'more servers - less load\n'
               '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
-              'more servers - less load'), reply_markup=donate_keyboard)
+              'more servers - less load'), reply_markup=await donate_keyboard())
         logger.error(f'{user_id} - Invoice NOT created\n'
                      f'Paid subscription: {is_paid_subscription}\n'
                      f'Currency: {currency}\n'

@@ -64,7 +64,7 @@ async def getting_url(message: Message, state: FSMContext):
                     try:  # If such link does not yet exist in the database
                         await db.add_user_photo(user_id, photo_link)
                         await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
-                                             reply_markup=photo_text_language_keyboard)
+                                             reply_markup=await photo_text_language_keyboard())
 
                         await state.set_state('ConfirmLangURLPhotoText')
                         await state.update_data(photo_link=photo_link)
@@ -82,7 +82,7 @@ async def getting_url(message: Message, state: FSMContext):
                                            f"Paid subscription - False")
                         else:
                             await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
-                                                 reply_markup=photo_text_language_keyboard)
+                                                 reply_markup=await photo_text_language_keyboard())
 
                             await state.set_state('ConfirmLangURLPhotoText')
                             await state.update_data(photo_link=photo_link)
@@ -106,7 +106,7 @@ async def getting_url(message: Message, state: FSMContext):
                 try:  # If such link does not yet exist in the database
                     await db.add_user_photo(user_id, photo_link)
                     await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
-                                         reply_markup=photo_text_language_keyboard)
+                                         reply_markup=await photo_text_language_keyboard())
 
                     await state.set_state('ConfirmLangURLPhotoText')
                     await state.update_data(photo_link=photo_link)
@@ -124,7 +124,7 @@ async def getting_url(message: Message, state: FSMContext):
                                        f"Paid subscribe - True")
                     else:
                         await message.answer(_('<b>Choose the language of the text on the photo:</b>'),
-                                             reply_markup=photo_text_language_keyboard)
+                                             reply_markup=await photo_text_language_keyboard())
 
                         await state.set_state('ConfirmLangURLPhotoText')
                         await state.update_data(photo_link=photo_link)
@@ -140,7 +140,7 @@ async def getting_url(message: Message, state: FSMContext):
         await message.answer(_('⚠ <b>OCR is available only for those who are subscribed to our channel!\n\n'
                                'Subscribe to <a href="https://t.me/TextFromImage">TEXT FROM IMAGE</a>. '
                                'Use the buttons below</b> ↡'),
-                             reply_markup=check_subscription_keyboard,
+                             reply_markup=await check_subscription_keyboard(),
                              disable_web_page_preview=True)
         logger.info(f'{user_id} - user not subscribed to the bot channel')
 

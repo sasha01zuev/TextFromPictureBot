@@ -11,4 +11,4 @@ from utils.misc import rate_limit
 async def message_to_admin(message: Message):
     """Message to admin via bot"""
 
-    await message.answer(_("<b>Select message type:</b>"), reply_markup=message_type_keyboard)
+    await message.answer(_("<b>Select message type:</b>"), reply_markup=await message_type_keyboard())
