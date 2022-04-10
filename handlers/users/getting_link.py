@@ -191,7 +191,7 @@ async def confirm_language_url_photo_text(call: CallbackQuery, callback_data: di
                          f'{response}')
 
             if '180 number of times within 3600 seconds' in response:  # If more than 180 requests per hour
-                await call.message.edit_text(_('⚠ <b>Bot is overloaded now! Will be available within the hour'
+                await call.message.edit_text(_('⚠ <b>Bot is overloaded now! Will be available within the hour '
                                                'Or sign up for a paid subscription - /donate</b>'))
                 logger.info(f'{user_id} - OCR_API exception: 180 requests per hour')
             else:
@@ -204,10 +204,10 @@ async def confirm_language_url_photo_text(call: CallbackQuery, callback_data: di
 
                     if 'file size exceeds' in error_message.lower():  # Big photo size error
                         await call.message.edit_text(_('⚠ <b>The photo size is too big! '
-                                                       'Try to reduce the size of the photo or send another photo!'
+                                                       'Try to reduce the size of the photo or send another photo! '
                                                        'Or sign up for a paid subscription - /donate</b>'))
                     elif 'timed out waiting' in error_message.lower():  # Server overloading error
-                        await call.message.edit_text(_('⚠ <b>Server overloaded, please try again later'
+                        await call.message.edit_text(_('⚠ <b>Server overloaded, please try again later! '
                                                        'Or sign up for a paid subscription - /donate</b>'))
                     else:
                         await call.message.edit_text(_('⚠ <b>An unexpected error has occurred</b>'))

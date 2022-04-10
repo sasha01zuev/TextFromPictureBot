@@ -1,5 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from loader import _
+from keyboards.inline.cancel_button import cancel_button
 
 language_keyboard = InlineKeyboardMarkup(row_width=1,
                                         inline_keyboard=[
@@ -16,9 +17,9 @@ language_keyboard = InlineKeyboardMarkup(row_width=1,
                                                                      callback_data="uk")
                                             ],
                                             [
-                                                InlineKeyboardButton(text=_("⬅ Отменить"),
-                                                                     callback_data="cancel")
+                                                cancel_button
                                             ]
+
 
                                         ]
                                         )

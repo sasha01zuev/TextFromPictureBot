@@ -11,4 +11,4 @@ from utils.misc import rate_limit
 async def change_language(message: Message):
     """Command change language"""
 
-    await message.answer(_('Choose your language:'), reply_markup=language_keyboard)
+    await message.answer(_('<b>Choose your language:</b>'), reply_markup=language_keyboard)

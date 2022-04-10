@@ -11,4 +11,14 @@ class ACLMiddleware(I18nMiddleware):
         from loader import db
         user = types.User.get_current()
         user_id = user.id
-        return await db.get_user_language(user_id)
+        user_language = await db.get_user_language(user_id)
+
+        if user_language:
+            return await db.get_user_language(user_id)
+        else:
+            if user.language_code in ['ru', 'be', 'ky', 'kk', 'tg', 'uz']:
+                return 'ru'
+            elif user.language_code == 'uk':
+                return 'uk'
+            else:
+                return 'en'
