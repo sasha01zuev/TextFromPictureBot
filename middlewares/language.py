@@ -14,7 +14,7 @@ class ACLMiddleware(I18nMiddleware):
         user_language = await db.get_user_language(user_id)
 
         if user_language:
-            return await db.get_user_language(user_id)
+            return user_language
         else:
             if user.language_code in ['ru', 'be', 'ky', 'kk', 'tg', 'uz']:
                 return 'ru'
