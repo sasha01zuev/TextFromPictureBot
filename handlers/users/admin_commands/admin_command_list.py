@@ -26,7 +26,9 @@ async def admin_command_list(message: types.Message):
             '/get_logs - Получить файл с логами\n\n'
             '/get_user_info - Получить информацию о пользователе\n'
             'Template: /get_user_info [user_id]\n\n'
-            '/users_quantity - Количество пользователей'
+            '/users_quantity - Количество пользователей\n\n'
+            '/get_user_photos - Получить фото пользователя\n'
+            'Template: /get_user_photos [user_id] [photos_quantity]'
         )
     else:
         await message.answer(
@@ -39,5 +41,7 @@ async def admin_command_list(message: types.Message):
             '/get_logs - Получить файл с логами\n\n'
             '/get_user_info - Получить информацию о пользователе\n'
             'Template: /get_user_info [user_id]\n\n'
-            '/users_quantity - Количество пользователей'
+            '/users_quantity - Количество пользователей\n\n'
+            '/get_user_photos - Получить фото пользователя\n'
+            'Template: /get_user_photos [user_id] [photos_quantity]'
         )
