@@ -22,7 +22,8 @@ async def admin_command_list(message: types.Message):
             '/rufb - Удалить пользователя с чёрного списка (Remove User From Blacklist)\n'
             'Template: /rufb [user_id]\n\n'
             '/mtu - Отправить сообщение пользователю (Message To User)\n'
-            'Template: /mtu [user_id]'
+            'Template: /mtu [user_id]\n\n'
+            '/get_logs - Получить файл с логами'
         )
     else:
         await message.answer(
@@ -31,5 +32,6 @@ async def admin_command_list(message: types.Message):
             '/rufb - Удалить пользователя с чёрного списка (Remove User From Blacklist)\n'
             'Template: /rufb [user_id]\n\n'
             '/mtu - Отправить сообщение пользователю (Message To User)\n'
-            'Template: /mtu [user_id]'
+            'Template: /mtu [user_id]\n\n'
+            '/get_logs - Получить файл с логами'
         )

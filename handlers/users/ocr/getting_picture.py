@@ -157,6 +157,7 @@ async def confirm_language_photo_text(call: CallbackQuery, callback_data: dict, 
     photo_lang = callback_data['language']
 
     if photo_lang == 'ukr':  # If chosen Ukrainian language (this language is unavailable in API)
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # tesseract EXE
         picture = cv2.imread(photo_path, 0)  # Reading photo bytes from photo path
         text_from_photo = pytesseract.image_to_string(picture, lang='ukr', config='--oem 3 --psm 6')
         # Converting image to string
