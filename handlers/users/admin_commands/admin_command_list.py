@@ -25,7 +25,8 @@ async def admin_command_list(message: types.Message):
             'Template: /mtu [user_id]\n\n'
             '/get_logs - Получить файл с логами\n\n'
             '/get_user_info - Получить информацию о пользователе\n'
-            'Template: /get_user_info [user_id]'
+            'Template: /get_user_info [user_id]\n\n'
+            '/users_quantity - Количество пользователей'
         )
     else:
         await message.answer(
@@ -37,5 +38,6 @@ async def admin_command_list(message: types.Message):
             'Template: /mtu [user_id]\n\n'
             '/get_logs - Получить файл с логами\n\n'
             '/get_user_info - Получить информацию о пользователе\n'
-            'Template: /get_user_info [user_id]'
+            'Template: /get_user_info [user_id]\n\n'
+            '/users_quantity - Количество пользователей'
         )
