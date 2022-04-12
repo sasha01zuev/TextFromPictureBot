@@ -162,6 +162,15 @@ class Database:
                              f'More details:\n'
                              f'{err}')
 
+    async def get_user_photos(self, user_id: int, limit: int = 5):
+        try:
+            sql = """
+            SELECT * FROM user_photos WHERE user_id = $1 ORDER BY datetime DESC LIMIT $2;
+            """
+            return await self.pool.fetch(sql, user_id, limit)
+        except:
+            return None
+
     async def add_photo_text(self, user_id: int, photo_id: str, text: str):
         try:
             sql = """
