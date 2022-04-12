@@ -23,7 +23,9 @@ async def admin_command_list(message: types.Message):
             'Template: /rufb [user_id]\n\n'
             '/mtu - Отправить сообщение пользователю (Message To User)\n'
             'Template: /mtu [user_id]\n\n'
-            '/get_logs - Получить файл с логами'
+            '/get_logs - Получить файл с логами\n\n'
+            '/get_user_info - Получить информацию о пользователе\n'
+            'Template: /get_user_info [user_id]'
         )
     else:
         await message.answer(
@@ -33,5 +35,7 @@ async def admin_command_list(message: types.Message):
             'Template: /rufb [user_id]\n\n'
             '/mtu - Отправить сообщение пользователю (Message To User)\n'
             'Template: /mtu [user_id]\n\n'
-            '/get_logs - Получить файл с логами'
+            '/get_logs - Получить файл с логами\n\n'
+            '/get_user_info - Получить информацию о пользователе\n'
+            'Template: /get_user_info [user_id]'
         )

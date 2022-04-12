@@ -62,6 +62,15 @@ class Database:
                              f'More details:\n'
                              f'{err}')
 
+    async def get_user_info(self, user_id: int):
+        try:
+            sql = """
+            SELECT * FROM user_info WHERE user_id = $1;
+            """
+            return await self.pool.fetchrow(sql, user_id)
+        except:
+            return None
+
     async def get_user_language(self, user_id: int):
         try:
             sql = """
@@ -177,6 +186,15 @@ class Database:
         except:
             return False
 
+    async def get_user_subscribes(self, user_id: int):
+        try:
+            sql = """
+            SELECT * FROM subscriptions WHERE user_id = $1 ORDER BY id DESC;
+            """
+            return await self.pool.fetch(sql, user_id)
+        except:
+            return None
+
     async def api_requests_per_day(self, user_id: int):
         try:
             sql = """
@@ -201,6 +219,15 @@ class Database:
             logger.exception(f'{user_id} - Unknown error while adding to database[donations]\n'
                              f'More details:\n'
                              f'{err}')
+
+    async def get_user_donations(self, user_id: int):
+        try:
+            sql = """
+            SELECT * FROM donations WHERE user_id = $1 ORDER BY id DESC;
+            """
+            return await self.pool.fetch(sql, user_id)
+        except:
+            return None
 
     async def add_user_subscription(self, user_id: int, date_to: str):
         try:

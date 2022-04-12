@@ -4,3 +4,4 @@ from .mass_mailing import dp
 from .message_to_user import dp
 from .admin_command_list import dp
 from .get_logs import dp
+from .get_user_info import dp
