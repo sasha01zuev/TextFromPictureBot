@@ -4,7 +4,7 @@ from aiogram.types import Message
 from data.config import ADMINS_ID
 
 
-from loader import dp, db
+from loader import dp, db, bot
 
 
 @dp.message_handler(Command('get_user_info'), user_id=ADMINS_ID)
@@ -13,7 +13,6 @@ async def get_user_info(message: Message):
         user_id = int(message.get_args())
         _, username, first_name = await db.get_user(user_id)
         _, registration_date, lang_code = await db.get_user_info(user_id)
-
         answer = f'Имя: {first_name}\n' \
                  f'Username: {username}\n' \
                  f'Язык: {lang_code}\n\n' \
@@ -32,6 +31,13 @@ async def get_user_info(message: Message):
                 donation_id, _, amount, currency, donate_message, datetime = user_donate
                 answer += f'ID: {donation_id}, Сумма: ${amount}, Валюта: {currency}, ' \
                           f'Сообщение: {donate_message}, Дата: {datetime}\n'
+
+        try:
+            profile_photo = await bot.get_user_profile_photos(user_id, limit=1)
+            profile_photo = profile_photo['photos'][0][-1]['file_id']
+            await message.answer_photo(profile_photo)
+        except:
+            pass
 
         await message.answer(answer)
     except ValueError:

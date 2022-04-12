@@ -62,6 +62,15 @@ class Database:
                              f'More details:\n'
                              f'{err}')
 
+    async def get_users_quantity(self):
+        try:
+            sql = """
+            SELECT COUNT(*) FROM users;
+            """
+            return await self.pool.fetchval(sql)
+        except:
+            return None
+
     async def get_user_info(self, user_id: int):
         try:
             sql = """
