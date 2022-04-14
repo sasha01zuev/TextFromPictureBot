@@ -12,6 +12,7 @@ PGUSER = env("PGUSER")
 PGPASSWORD = env("PGPASSWORD")
 
 CHANNEL = env("CHANNEL")
+CHAT = env("CHAT")
 
 IP = env("IP")
 

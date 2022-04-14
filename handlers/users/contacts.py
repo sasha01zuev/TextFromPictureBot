@@ -3,6 +3,7 @@ from aiogram.types import Message
 
 from loader import dp, _
 from utils.misc import rate_limit
+from data.config import CHAT, CHANNEL
 
 
 @rate_limit(limit=2)  # Anti-spam
@@ -12,5 +13,5 @@ async def contacts(message: Message):
 
     await message.answer(_("<b>CONTACTS:\n\n"
                            "👨‍💻 Chief Administrator: @Sasha_Zuev\n\n"
-                           "💬 All updates and all news will be in our channel: t.me/TextFromImage\n\n"
-                           "👥 Our chat: t.me/TextFromImageChat</b>"))
+                           "💬 All updates and all news will be in our channel: {channel}\n\n"
+                           "👥 Our chat: {chat}</b>").format(channel=CHANNEL, chat=CHAT))

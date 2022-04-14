@@ -10,8 +10,7 @@ class ACLMiddleware(I18nMiddleware):
     async def get_user_locale(self, action: str, args: Tuple[Any]) -> str:
         from loader import db
         user = types.User.get_current()
-        user_id = user.id
-        user_language = await db.get_user_language(user_id)
+        user_language = await db.get_user_language(user.id)
 
         if user_language:
             return user_language
