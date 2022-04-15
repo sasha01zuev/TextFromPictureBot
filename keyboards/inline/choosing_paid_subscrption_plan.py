@@ -9,14 +9,14 @@ async def paid_subscription_plan_keyboard():
         row_width=1,
         inline_keyboard=[
             [
-                InlineKeyboardButton(text=_("30$/month"),
+                InlineKeyboardButton(text=_("3$/month"),
                                      callback_data=choosing_paid_subscription_plan_callback.new(
-                                         amount='30'))
+                                         amount='3'))
             ],
             [
-                InlineKeyboardButton(text=_("60$/month"),
+                InlineKeyboardButton(text=_("5$/month"),
                                      callback_data=choosing_paid_subscription_plan_callback.new(
-                                         amount='60'))
+                                         amount='5'))
             ],
             [
                 await cancel_button()
