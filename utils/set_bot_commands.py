@@ -9,6 +9,7 @@ async def set_default_commands(dp):
         types.BotCommand("language", "Change bot language"),
         types.BotCommand("donate", "Sign up for a paid subscription or donate"),
         types.BotCommand("help", 'How to use this bot'),
-        types.BotCommand("contacts", 'Our contacts and links'),
+        types.BotCommand("message_to_admin", 'Write message to an admin'),
+        types.BotCommand("contacts", 'Our contacts and links')
 
     ])
