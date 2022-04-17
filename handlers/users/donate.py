@@ -16,7 +16,7 @@ async def donate(message: Message):
                            '✅ If you chosen "<b>Support us</b>" — you can choose any amount to donate\n\n'
                            '✅ If you have chosen "<b>Paid subscription</b>" — '
                            'you can choose several types of subscription:\n'
-                           '    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
+                           '    · <b>3$/month</b> — 3000 photos/hour, 125.000 photos/month, photo size limit - 5MB, '
                            'more servers - less load\n'
-                           '    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
+                           '    · <b>5$/month</b> — 6000 photos/hour, 250.000 photos/month, photo size limit - 100MB, '
                            'more servers - less load'), reply_markup=await donate_keyboard())

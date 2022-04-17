@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-14 17:27+0300\n"
+"POT-Creation-Date: 2022-04-18 00:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,6 @@ msgstr ""
 #: handlers/users/cancel.py:91 handlers/users/cancel.py:109
 #: handlers/users/cancel.py:127 handlers/users/cancel.py:145
 #: handlers/users/donate.py:14
-#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:63
 msgid ""
 "<b>To support us or get a paid subscription, you need to register in the "
 "official telegram crypto wallet bot - @CryptoBot and top up your "
@@ -38,9 +37,9 @@ msgid ""
 "\n"
 "✅ If you have chosen \"<b>Paid subscription</b>\" — you can choose "
 "several types of subscription:\n"
-"    · <b>30$/month</b> — 3000 photos/hour, 125.000 photos/month, photo "
+"    · <b>3$/month</b> — 3000 photos/hour, 125.000 photos/month, photo "
 "size limit - 5MB, more servers - less load\n"
-"    · <b>60$/month</b> — 6000 photos/hour, 250.000 photos/month, photo "
+"    · <b>5$/month</b> — 6000 photos/hour, 250.000 photos/month, photo "
 "size limit - 100MB, more servers - less load"
 msgstr ""
 
@@ -129,6 +128,23 @@ msgstr ""
 
 #: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:61
 msgid "Unknown error while generating invoice!"
+msgstr ""
+
+#: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:63
+msgid ""
+"<b>To support us or get a paid subscription, you need to register in the "
+"official telegram crypto wallet bot - @CryptoBot and top up your "
+"wallet</b>\n"
+"\n"
+"✅ If you chosen \"<b>Support us</b>\" — you can choose any amount to "
+"donate\n"
+"\n"
+"✅ If you have chosen \"<b>Paid subscription</b>\" — you can choose "
+"several types of subscription:\n"
+"    · <b>3$/month</b> — 3000 photos/hour, 125.000 photos/month, photo "
+"size limit - 5MB, more servers - less load\n"
+"    · <b>3$/month</b> — 6000 photos/hour, 250.000 photos/month, photo "
+"size limit - 100MB, more servers - less load"
 msgstr ""
 
 #: handlers/users/donate_buttons/cryptocurrencies_buttons/confirm_payment.py:103
@@ -286,11 +302,11 @@ msgid "[2] Check subscribe"
 msgstr ""
 
 #: keyboards/inline/choosing_paid_subscrption_plan.py:12
-msgid "30$/month"
+msgid "3$/month"
 msgstr ""
 
 #: keyboards/inline/choosing_paid_subscrption_plan.py:17
-msgid "60$/month"
+msgid "5$/month"
 msgstr ""
 
 #: keyboards/inline/confirm_pay_amount.py:12
