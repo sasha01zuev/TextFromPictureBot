@@ -103,7 +103,7 @@ async def payment_confirmed(call: CallbackQuery, state: FSMContext):
         await call.message.edit_text(_('<b>THANKS FOR DONATION!</b>'))
         if is_paid_subscription:  # If paid for paid subscription
             await db.add_user_donate(user_id=user_id, amount=amount, currency=currency, message=comment)
-            await db.add_user_subscription(user_id=user_id, date_to=amount)
+            await db.add_user_subscription(user_id=user_id)
             logger.success(f'{user_id} - Invoice PAID\n'
                            f'Invoice: {paid_invoice}\n'
                            f'Paid subscription: {is_paid_subscription}\n'

@@ -247,7 +247,7 @@ class Database:
         except:
             return None
 
-    async def add_user_subscription(self, user_id: int, date_to: str):
+    async def add_user_subscription(self, user_id: int, date_to: str = '30'):
         try:
             sql = f"""
                 INSERT INTO subscriptions(user_id, donation_id, date_to)
