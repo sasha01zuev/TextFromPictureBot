@@ -11,7 +11,7 @@ async def photo_text_language_keyboard():
                 InlineKeyboardButton(text="English",
                                      callback_data=photo_text_language_callback.new(
                                          language="eng")),
-                InlineKeyboardButton(text="Russian",
+                InlineKeyboardButton(text="Kharkov, Odessa language",
                                      callback_data=photo_text_language_callback.new(
                                          language="rus"))
             ],

@@ -12,6 +12,6 @@ async def contacts(message: Message):
     """Command help"""
 
     await message.answer(_("<b>CONTACTS:\n\n"
-                           "👨‍💻 Chief Administrator: @Sasha_Zuev\n\n"
+                           "👨‍💻 Chief Administrator: @Sasha_Zuiev\n\n"
                            "💬 All updates and all news will be in our channel: {channel}\n\n"
                            "👥 Our chat: {chat}</b>").format(channel=CHANNEL, chat=CHAT))

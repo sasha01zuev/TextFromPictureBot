@@ -11,7 +11,7 @@ async def language_keyboard():
                                                              callback_data="en")
                                     ],
                                     [
-                                        InlineKeyboardButton(text="🇷🇺 Русский",
+                                        InlineKeyboardButton(text="🏴‍☠ Харьковский, Одесский",
                                                              callback_data="ru")
                                     ],
                                     [

@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2022 ORGANIZATION
+# Copyright (C) 2023 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-04-18 00:34+0300\n"
+"POT-Creation-Date: 2023-12-06 04:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 msgid ""
 "<b>CONTACTS:\n"
 "\n"
-"👨‍💻 Chief Administrator: @Sasha_Zuev\n"
+"👨‍💻 Chief Administrator: @Sasha_Zuiev\n"
 "\n"
 "💬 All updates and all news will be in our channel: {channel}\n"
 "\n"
@@ -217,8 +217,8 @@ msgstr ""
 msgid ""
 "⚠ <b>OCR is available only for those who are subscribed to our channel!\n"
 "\n"
-"Subscribe to <a href=\"https://t.me/VazonezBots\">VAZONEZ BOTS</a>. Use "
-"the buttons below</b> ↡"
+"Subscribe to <a href=\"https://t.me/TextFromPictureChannel\">Text From "
+"Picture Channel</a>. Use the buttons below</b> ↡"
 msgstr ""
 
 #: handlers/users/ocr/getting_link.py:153
@@ -298,7 +298,7 @@ msgid "[1] Subscribe"
 msgstr ""
 
 #: keyboards/inline/check_subscription.py:13
-msgid "[2] Check subscribe"
+msgid "[2] Check subscription"
 msgstr ""
 
 #: keyboards/inline/choosing_paid_subscrption_plan.py:12

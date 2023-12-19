@@ -136,7 +136,7 @@ async def getting_picture(message: Message, state: FSMContext):
                                  f'More details:\n{err}')
     else:
         await message.answer(_('⚠ <b>OCR is available only for those who are subscribed to our channel!\n\n'
-                               'Subscribe to <a href="https://t.me/VazonezBots">VAZONEZ BOTS</a>. '
+                               'Subscribe to <a href="https://t.me/TextFromPictureChannel">Text From Picture Channel</a>. '
                                'Use the buttons below</b> ↡'),
                              reply_markup=await check_subscription_keyboard(),
                              disable_web_page_preview=True)

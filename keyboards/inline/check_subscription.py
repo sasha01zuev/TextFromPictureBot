@@ -7,10 +7,10 @@ async def check_subscription_keyboard():
                                 inline_keyboard=[
                                     [
                                         InlineKeyboardButton(text=_("[1] Subscribe"),
-                                                             url="https://t.me/VazonezBots")
+                                                             url="https://t.me/TextFromPictureChannel")
                                     ],
                                     [
-                                        InlineKeyboardButton(text=_("[2] Check subscribe"),
+                                        InlineKeyboardButton(text=_("[2] Check subscription"),
                                                              callback_data="check_subscription")
                                     ]
 
